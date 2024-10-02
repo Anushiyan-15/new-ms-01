@@ -1,0 +1,320 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+
+}
+.dashboard-container form button:hover{
+    background-color: chartreuse;
+}
+.delete-button:hover{
+    background-color: red;
+}
+.editBtn:hover{
+    background-color: #679504;
+}
+.editBtn{
+    background-color: rgba(58, 142, 232, 0.591) ;
+}
+.delete-button{
+    background-color: rgba(58, 142, 232, 0.591);
+}
+
+
+
+
+.dashboard-container,.customer-container ,.rental-container, .overdue-container ,.return-container,.displaycontainer,.update-container{
+    margin: 20px;
+    border-radius: 20px;
+    width: 100rem;
+    padding: 20px;
+    background: rgba(213, 241, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(204, 208, 255, 0.37);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(3px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.dashboard-container h1 {
+  
+    text-align: center;
+    margin-bottom: 20px;
+    color: rgb(179, 246, 231);
+    
+}
+
+.dashboard-container h2 {
+    color: azure;
+  
+}
+.dashboard-container form, .dashboard-container table
+, .customer-container table,.rental-container table
+,.overdue-container table,.displaycontainer table,.update-container table,
+.return-container form {
+    margin: 20px 0;
+    padding-left: 100px;
+    
+}
+
+
+#overduelist{
+  
+    text-align: center;
+}
+.dashboard-container form,.return-container form{
+    display: block;
+}
+
+
+.dashboard-container input , .dashboard-container button,.return-container input,.return-container button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    width: 80%;
+}
+
+
+
+.dashboard-container button,.return-container button {
+    width: auto;
+    border-radius: 5px;
+    border: none;
+}
+.dashboard-container input,.return-container input{
+    border-radius: 5px;
+    border: none;
+}
+.dashboard-container button,.return-container button {
+    cursor: pointer;
+}
+.dashboard-container table ,.customer-container table,.rental-container table,.overdue-container table,.displaycontainer table,.update-container {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+.dashboard-container th, .dashboard-container td , 
+.customer-container th,.customer-container td ,
+.rental-container th,.rental-container td,
+.overdue-container th,.overdue-container td
+.displaycontainer th .displaycontainer td,.update-container th .update-container td{
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+
+.dashboard-container th,.customer-container th ,.rental-container th ,.overdue-container th,.displaycontainer th,.update-container {
+    background-color: #f4f4f4;
+}
+.dashboard-container img {
+    max-width: 100px;
+    height: auto;
+}
+.manager-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+}
+.manager-link a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 18px;
+}
+
+
+
+:root {
+    --primaer-color: #fff;
+}
+
+body {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: start;
+    background-image: url(../img/1.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: auto;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    align-items: center;
+    box-shadow: 0px 4px 10px 1px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: 1s;
+    background: rgba(213, 241, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(204, 208, 255, 0.37);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(3px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.container .brand {
+    display: flex;
+    width: 100%;
+    height: 40px;
+    padding: 0 10px;
+    margin: 10px 0;
+    align-items: center;
+    gap: 5px;
+    color: #fff;
+    
+}
+
+.container .brand p::first-letter{
+    color: red;
+    font-size: larger;
+}
+
+.container .img{
+    display: flex;
+    gap: 10px;
+    height: 50px; 
+    margin-top: 7px;
+   
+ 
+}
+
+.container .brand h3 {
+    font-weight: 300;
+    font-size: 20px;
+    color: var(--primaer-color);
+}
+
+.container .brand a i {
+    color: var(--primaer-color);
+    font-size: 30px;
+}
+
+.container .navbar {
+    display: flex;
+    width: 100%;
+    height: auto;
+
+    margin: 50px 0 ;
+    align-items: center;
+    justify-content: center;
+}
+
+.container .navbar ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.container .navbar ul li {
+    height: 40px;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.container .navbar ul li a {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    border-radius: 7px;
+    align-items: center;
+    justify-content: left;
+}
+
+.add .navbar:nth-child(4) {
+    margin: 0;
+}
+
+.container .navbar ul li a {
+    color: whitesmoke;
+    
+}
+
+.container .navbar ul li a span {
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.container .navbar ul li a i {
+    display: flex;
+    font-size: 20px;
+    margin: 0 15px;
+}
+
+.container .navbar ul li a:hover,
+.container .navbar ul li a:hover span,
+.container .navbar ul li a:hover i {
+    background:transparent;
+    backdrop-filter: blur(75px);
+    background-color: darkturquoise;
+
+    transition: 0.5s all;
+
+}
+
+.container .navbar ul li a:hover{
+    box-shadow: 0 5px 5px #000;
+    transition: 0.5s all;
+}
+
+.container .brand{
+    background-color: #575555;
+    height: 70px;
+    gap: 5px;
+}
+.container.active {
+    width:80px;
+}
+
+.container.active .brand {
+    justify-content: center;
+}
+
+.container.active .navbar ul {
+    width: 90%;
+}
+
+.container.active .user {
+    width: 80%;
+    height: 100%;
+}
+
+.container.active .navbar ul li a {
+    justify-content: center;
+}
+
+.container.active .brand .logo,
+.container.active .brand h3,
+.container.active .navbar ul li a span,
+.container.active .user .name {
+    display: none;
+}
+
+.log-out{
+    position: relative;
+    top: 150px;
+    
+}
+
+
+#Dvds-table,#customer-table{
+    color: #f3efef;
+    background-color: #000;
+}
+
+#Dvds-table th,#customer-table th{
+    color: #000;
+}
+

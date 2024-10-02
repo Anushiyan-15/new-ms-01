@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Sign_up</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
+
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins";
+      box-sizing: border-box;
+    }
+
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #faf8f8;
+      min-height: 100vh;
+      background-image: url(img/signup.jpg);
+      background-size: cover;
+
+    }
+
+    .container {
+      position: relative;
+      width: 256px;
+      height: 256px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f92df3;
+    }
+
+    .container span {
+      position: absolute;
+      left: 0;
+      width: 32px;
+      height: 5px;
+      background: #2c4766;
+      border-radius: 8px;
+      transform-origin: 150px;
+      transform: scale(2.2) rotate(calc(var(--i) * (360deg / 50)));
+      animation: animateBlink 1s linear infinite;
+      animation-delay: calc(var(--i) * (3s / 50));
+    }
+
+
+
+    .login-box {
+      position: absolute;
+      width: 400px;
+    }
+
+    .login-box form {
+      width: 100%;
+      padding: 0 50px;
+    }
+
+    h2 {
+      font-size: 2em;
+      color: #00fffc;
+      text-align: center;
+    }
+
+
+
+   
+
+    .forgot-password a:hover {
+      text-decoration: underline;
+    }
+
+    .btn {
+      width: 100%;
+      height: 45px;
+      border-radius: 45px;
+      background: #00fffc;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      font-size: 1em;
+      color: #1f293a;
+      font-weight: 600;
+      margin-left: 10px;
+    }
+
+    .signup-link {
+      margin: 20px 0 10px;
+      text-align: center;
+      margin-left: 20px;
+    }
+
+    .signup-link a {
+      font-size: 1em;
+      color: #f92df3;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .signup-link a:hover {
+      text-decoration: underline;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+      width: 100%;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .login-form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 300px;
+}
+
+.login-form h1 {
+    color: #6001d2;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+  </style>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="login-form" id="registerForm">
+      <h2>Register</h2>
+      <form action="#">
+        <div class="input-group">
+          <label>Username: </label>
+          <input type="text" required id="registerUsername">
+          
+        </div>
+        <div class="input-group">
+          <label>Password:</label>
+          <input type="password" required id="registerPassword">
+          
+        </div>
+        <div class="input-group">
+          <label>NIC No:</label>
+          <input type="text" required id="registerNIC" minlength="10" maxlength="10">
+          
+        </div>
+        <div class="input-group">
+          <label>Email: </label>
+          <input type="email" required id="registeremail">
+         
+        </div>
+        <div class="input-group">
+          <label>Mobile number:</label>
+          <input type="number" required id="registernumber" minlength="10" maxlength="10">
+          
+        </div>
+        <button type="submit" class="btn">Register</button>
+        <div class="signup-link">
+          <a href="login.html">Sign in</a>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="login.js"></script>
+
+</body>
+
+</html>
