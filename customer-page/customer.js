@@ -19,7 +19,7 @@ function showdvd() {
     // // </div>
     // // `;
 
-    Dvdcard.innerHTML = `      <div class="card">
+    Dvdcard.innerHTML = `      <div class="card" id=${Dvd.id}>
             <img src="${Dvd.image}" alt="${Dvd.title}" class="item-image">
             <div class="card-content">
                 <h2 class="item-title">Movie Name: ${Dvd.title}</h2>
@@ -70,203 +70,261 @@ window.onload = showdvd();
 // }
 
 // Function to show DVD details and allow customer to rent
-function showDVDDetails(dvdId) {
-  const selectedDVD = dvds.find((dvd) => dvd.id === dvdId);
-  const dvdDetailsDiv = document.getElementById("dvd-details");
+// function showDVDDetails(dvdId) {
+//   const selectedDVD = dvds.find((dvd) => dvd.id === dvdId);
+//   const dvdDetailsDiv = document.getElementById("dvd-details");
 
-  if (selectedDVD) {
-    dvdDetailsDiv.innerHTML = `
-            <h2>DVD Details</h2>
-            <p>Title: ${selectedDVD.title}</p>
-            <p>Description: ${selectedDVD.description}</p>
-            <button onclick="rentDVD('${selectedDVD.id}', '${selectedDVD.title}')">Confirm Rent</button>
-        `;
-  } else {
-    dvdDetailsDiv.innerHTML = "<p>DVD not found.</p>";
-  }
-}
+//   if (selectedDVD) {
+//     dvdDetailsDiv.innerHTML = `
+//             <h2>DVD Details</h2>
+//             <p>Title: ${selectedDVD.title}</p>
+//             <p>Description: ${selectedDVD.description}</p>
+//             <button onclick="rentDVD('${selectedDVD.id}', '${selectedDVD.title}')">Confirm Rent</button>
+//         `;
+//   } else {
+//     dvdDetailsDiv.innerHTML = "<p>DVD not found.</p>";
+//   }
+// }
 
 // Function to handle rent button click and send rental request
-function rentDVD(dvdId, dvdTitle) {
-  const rentRequest = {
-    dvdId: dvdId,
-    dvdTitle: dvdTitle,
-    status: "pending",
-    customerId: "12345", // Replace with actual customer ID or fetch dynamically
-  };
+// function rentDVD(dvdId, dvdTitle) {
+//   const rentRequest = {
+//     dvdId: dvdId,
+//     dvdTitle: dvdTitle,
+//     status: "pending",
+//     customerId: "12345", // Replace with actual customer ID or fetch dynamically
+//   };
 
-  // Store the rent request in localStorage for simplicity (or send to server)
-  localStorage.setItem(`rentRequest-${dvdId}`, JSON.stringify(rentRequest));
+//   // Store the rent request in localStorage for simplicity (or send to server)
+//   localStorage.setItem(`rentRequest-${dvdId}`, JSON.stringify(rentRequest));
 
-  alert(`Rental request for "${dvdTitle}" sent to manager for approval!`);
-}
+//   alert(`Rental request for "${dvdTitle}" sent to manager for approval!`);
+// }
 
 // Call loadDVDs() on page load to display the list of DVDs
 // window.onload = loadDVDs;
 
 // Function to dynamically store item details (including quantity) when 'Rent' button is clicked
-function storeItemDetails(buttonElement) {
-  // Find the closest card to the button that was clicked
-  var card = buttonElement.closest(".card");
-  const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
-  const Dvds = JSON.parse(localStorage.getItem("Dvds")) || [];
+// function storeItemDetails(buttonElement) {
+// Find the closest card to the button that was clicked
+// var card = buttonElement.closest(".card");
+// const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
+// const Dvds = JSON.parse(localStorage.getItem("Dvds")) || [];
 
-  // Extract dynamic details from the card
-  if (card) {
-      var itemTitle = card.querySelector(".item-title").innerText;
-      var itemImage = card.querySelector(".item-image")
-      ? card.querySelector(".item-image").src
-      : null;
-      var itemDescription = card.querySelector(".item-description").innerText;
-      var itemQuantity = card.querySelector(".item-quantity").value; // Get the quantity input v
-      
-      // Store details in localStorage
-      const itemDetails = {
-          dvdid:Dvds.id,
-          title: itemTitle,
-          image: itemImage,
-          user: currentUser.username,
-          NIC: currentUser.nic,
-          description: itemDescription,
-          status: "pending",
-          quantity: parseInt(itemQuantity) // Store quantity as an integer
-        };
-    const customerRental = JSON.parse(localStorage.getItem('rentItem')) || []
-    customerRental.push(itemDetails)
+// // Extract dynamic details from the card
+// if (card) {
+//     var dvdId = Dvds.find(dvd=>dvd.id==card.id)
+//     var itemTitle = card.querySelector(".item-title").innerText;
+//     var itemImage = card.querySelector(".item-image")? card.querySelector(".item-image").src : null;
+//     var itemDescription = card.querySelector(".item-description").innerText;
+//     var itemQuantity = card.querySelector(".item-quantity").value; // Get the quantity input v
+
+//     // Store details in localStorage
+//     const itemDetails = {
+//         dvdid:dvdId,
+//         title: itemTitle,
+//         image: itemImage,
+//         user: currentUser.username,
+//         NIC: currentUser.nic,
+//         description: itemDescription,
+//         status: "pending",
+//         quantity: parseInt(itemQuantity) // Store quantity as an integer
+//       };
+//   const customerRental = JSON.parse(localStorage.getItem('rentItem')) || []
+//   customerRental.push(itemDetails)
+//   localStorage.setItem("rentItem", JSON.stringify(customerRental));
+
+// Now show the popup with the stored details
+// showRentPopup();
+
+// }
+
+function storeItemDetails(buttonElement) {
+  try {
+    // Find the closest card to the button that was clicked
+    var card = buttonElement.closest(".card");
+    
+    if (!card) {
+      console.error("Card not found!");
+      return;
+    }
+
+    const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
+    if (!currentUser) {
+      // console.error("No current user found in session storage!");
+      return;
+    }
+
+    const Dvds = JSON.parse(localStorage.getItem("Dvds")) || [];
+    // console.log("Available DVDs:", Dvds); // Log the available DVDs for debugging
+    var dvdId = card.id; // Assuming the card's id is the DVD id
+    var dvd = Dvds.find(dvd => dvd.id == dvdId);
+
+    if (!dvd) {
+      console.error("DVD not found for the given card ID:", dvd);
+      return;
+    }
+
+    var itemTitle = card.querySelector(".item-title") ? card.querySelector(".item-title").innerText : null;
+    // var itemImage = card.querySelector(".item-image") ? card.querySelector(".item-image").src : null;
+    // var itemDescription = card.querySelector(".item-description") ? card.querySelector(".item-description").innerText : null;
+    var itemQuantity = card.querySelector(".item-quantity") ? card.querySelector(".item-quantity").value : "0";
+
+    // Store details in localStorage
+    const itemDetails = {
+      dvdid: dvd.id, // Use the found DVD's ID
+      title: itemTitle,
+      user: currentUser.username,
+      NIC: currentUser.nic,
+      rentdate:new Date(),
+      status: "pending",
+      quantity: parseInt(itemQuantity) // Store quantity as an integer
+    };
+
+    // Retrieve existing rental items or initialize an empty array
+    const customerRental = JSON.parse(localStorage.getItem('rentItem')) || [];
+    customerRental.push(itemDetails);
+    
+    // Store updated rental items back to localStorage
     localStorage.setItem("rentItem", JSON.stringify(customerRental));
 
     // Now show the popup with the stored details
     showRentPopup();
+  } catch (error) {
+    console.error("An error occurred:", error);
   }
-
-  function mainquantity(itemQuantity) {
-    const Dvds = JSON.parse(localStorage.getItem("Dvds")) || [];
-    const rentItem = JSON.parse(localStorage.getItem("rentItem")) || [];
-
-    const dvdToUpdate = Dvds.find((dvd) => dvd.title === rentItem.title);
-    dvdToUpdate.quantity -= itemQuantity;
-    localStorage.setItem("Dvds", JSON.stringify(dvdToUpdate));
-
-    // if (dvdToUpdate) {
-
-    //     console.log(`Updated Dvds after renting:`, Dvds);
-    // } else {
-    //     console.log('Could not find DVD in the list.');
-    // }
-  }
-
-  // Function to show the modal and populate the content from localStorage
-  function showRentPopup() {
-    // Retrieve the item details from localStorage
-    let rentItem = JSON.parse(localStorage.getItem("rentItem"));
-
-    if (rentItem) {
-      // Populate the modal with the retrieved data
-      document.getElementById("popup-title").innerText = rentItem.title;
-      document.getElementById("popup-image").src = rentItem.image;
-      document.getElementById("popup-description").innerText =
-        rentItem.description;
-      // document.getElementById('quantity').value = rentItem.quantity;
-
-      // Display the modal
-      document.getElementById("rentpopup").style.display = "block";
-    } else {
-      alert("No item found in localStorage");
-    }
-  }
-
-  // Function to close the modal
-  // document.getElementById('closebutton').onclick = function() {
-  //     document.getElementById('rentpopup').style.display = 'none';
-  // }
-
-  document
-    .getElementById("closebutton")
-    .addEventListener("click", cloasepopuprent);
-
-  function cloasepopuprent() {
-    document.getElementById("rentpopup").style.display = "none";
-  }
-
-  // Function to save the final details (e.g., when the user confirms rent)
-  document.getElementById("saveDetails").addEventListener("click", saveDetails);
-  function saveDetails() {
-    let rentItem = JSON.parse(localStorage.getItem("rentItem"));
-
-    alert(
-      `You have rented ${rentItem.title} with quantity ${rentItem.quantity} you get the Dvd before 24 hours afater the hour your rent will be cancel `
-    );
-
-    // Close the modal after saving
-    document.getElementById("rentpopup").style.display = "none";
-  }
-
-  // Close the modal when clicking outside of it
-  window.onclick = function (event) {
-    var modal = document.getElementById("rentpopup");
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  };
-
-  // Optionally load saved data from localStorage (if needed)
-  window.onload = function () {
-    let rentItem = JSON.parse(localStorage.getItem("rentItem"));
-    if (rentItem) {
-      console.log("Previously rented item details:", rentItem);
-      // Optionally, populate the modal with previously saved data when page loads
-    }
-  };
-
-  // function filterVideos() {
-  //     const searchInput = document.getElementById('searchInput').value.toLowerCase();
-  //     const genreFilter = document.getElementById('genreFilter').value;
-
-  //     const filteredVideos = Dvd.filter(video => {
-  //         const matchesSearch = video.title.toLowerCase().includes(searchInput);
-  //         const matchesGenre = genreFilter === '' || video.genre === genreFilter;
-  //         return matchesSearch && matchesGenre;
-  //     });
-
-  //     displayVideos(filteredVideos);
-  // }
-
-  // document.getElementById('searchInput').addEventListener('input', filterVideos);
-  // document.getElementById('genreFilter').addEventListener('change', filterVideos);
-
-  // // Initial display
-  // displayVideos(Dvd);
-
-  // const modal = document.getElementById('videoModal');
-  // const modalTitle = document.getElementById('modalTitle');
-  // const modalImage = document.getElementById('modalImage');
-  // const modalDescription = document.getElementById('modalDescription');
-  // const closeModal = document.querySelector('.close');
-
-  // document.getElementById('videoList').addEventListener('click', event => {
-  //     if (event.target.closest('.video-item')) {
-  //         const videoTitle = event.target.closest('.video-item').querySelector('h3').textContent;
-  //         const video = Dvd.find(v => v.title === videoTitle);
-
-  //         if (video) {
-  //             modalTitle.textContent = video.title;
-  //             modalImage.src = video.image;
-  //             modalDescription.textContent = 'Description for ' + video.title; // Replace with actual description if available
-  //             modal.style.display = 'block';
-  //         }
-  //     }
-  // });
-
-  // closeModal.onclick = function () {
-  //     modal.style.display = 'none';
-  // }
-
-  window.onclick = function (event) {
-    if (event.target === modal) {
-      modal.style.display = "none";
-    }
-  };
 }
+
+
+
+function mainquantity(itemQuantity) {
+  const Dvds = JSON.parse(localStorage.getItem("Dvds")) || [];
+  const rentItem = JSON.parse(localStorage.getItem("rentItem")) || [];
+
+  const dvdToUpdate = Dvds.find((dvd) => dvd.title === rentItem.title);
+  dvdToUpdate.quantity -= itemQuantity;
+  localStorage.setItem("Dvds", JSON.stringify(dvdToUpdate));
+
+  // if (dvdToUpdate) {
+
+  //     console.log(`Updated Dvds after renting:`, Dvds);
+  // } else {
+  //     console.log('Could not find DVD in the list.');
+  // }
+}
+
+// Function to show the modal and populate the content from localStorage
+function showRentPopup() {
+  // Retrieve the item details from localStorage
+  let rentItem = JSON.parse(localStorage.getItem("rentItem"));
+
+  if (rentItem) {
+    // Populate the modal with the retrieved data
+    document.getElementById("popup-title").innerText = rentItem.title;
+    document.getElementById("popup-image").src = rentItem.image;
+    document.getElementById("popup-description").innerText =
+      rentItem.description;
+    // document.getElementById('quantity').value = rentItem.quantity;
+
+    // Display the modal
+    document.getElementById("rentpopup").style.display = "block";
+  } else {
+    alert("No item found in localStorage");
+  }
+}
+
+// Function to close the modal
+// document.getElementById('closebutton').onclick = function() {
+//     document.getElementById('rentpopup').style.display = 'none';
+// }
+
+document
+  .getElementById("closebutton")
+  .addEventListener("click", cloasepopuprent);
+
+function cloasepopuprent() {
+  document.getElementById("rentpopup").style.display = "none";
+}
+
+// Function to save the final details (e.g., when the user confirms rent)
+document.getElementById("saveDetails").addEventListener("click", saveDetails);
+function saveDetails() {
+  let rentItem = JSON.parse(localStorage.getItem("rentItem"));
+
+  alert(
+    `You have rented ${rentItem.title} with quantity ${rentItem.quantity} you get the Dvd before 24 hours afater the hour your rent will be cancel `
+  );
+
+  // Close the modal after saving
+  document.getElementById("rentpopup").style.display = "none";
+}
+
+// Close the modal when clicking outside of it
+window.onclick = function (event) {
+  var modal = document.getElementById("rentpopup");
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
+
+// Optionally load saved data from localStorage (if needed)
+window.onload = function () {
+  let rentItem = JSON.parse(localStorage.getItem("rentItem"));
+  if (rentItem) {
+    console.log("Previously rented item details:", rentItem);
+    // Optionally, populate the modal with previously saved data when page loads
+  }
+};
+
+// function filterVideos() {
+//     const searchInput = document.getElementById('searchInput').value.toLowerCase();
+//     const genreFilter = document.getElementById('genreFilter').value;
+
+//     const filteredVideos = Dvd.filter(video => {
+//         const matchesSearch = video.title.toLowerCase().includes(searchInput);
+//         const matchesGenre = genreFilter === '' || video.genre === genreFilter;
+//         return matchesSearch && matchesGenre;
+//     });
+
+//     displayVideos(filteredVideos);
+// }
+
+// document.getElementById('searchInput').addEventListener('input', filterVideos);
+// document.getElementById('genreFilter').addEventListener('change', filterVideos);
+
+// // Initial display
+// displayVideos(Dvd);
+
+// const modal = document.getElementById('videoModal');
+// const modalTitle = document.getElementById('modalTitle');
+// const modalImage = document.getElementById('modalImage');
+// const modalDescription = document.getElementById('modalDescription');
+// const closeModal = document.querySelector('.close');
+
+// document.getElementById('videoList').addEventListener('click', event => {
+//     if (event.target.closest('.video-item')) {
+//         const videoTitle = event.target.closest('.video-item').querySelector('h3').textContent;
+//         const video = Dvd.find(v => v.title === videoTitle);
+
+//         if (video) {
+//             modalTitle.textContent = video.title;
+//             modalImage.src = video.image;
+//             modalDescription.textContent = 'Description for ' + video.title; // Replace with actual description if available
+//             modal.style.display = 'block';
+//         }
+//     }
+// });
+
+// closeModal.onclick = function () {
+//     modal.style.display = 'none';
+// }
+
+window.onclick = function (event) {
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
+};
+
 
 // Function to close the modal
 document.getElementById("closebutton").addEventListener("click", closeModal);
@@ -438,9 +496,8 @@ function loadReviewsFromLocalStorage() {
             </div>
             <h1>${review.name}</h1>
             <div class="stars">
-                ${"&#9733;".repeat(review.rating)} ${
-      review.rating < 5 ? "&#9734;".repeat(5 - review.rating) : ""
-    }
+                ${"&#9733;".repeat(review.rating)} ${review.rating < 5 ? "&#9734;".repeat(5 - review.rating) : ""
+      }
             </div>
             <p>${review.review}</p>
         `;

@@ -308,45 +308,45 @@ function returnshow() {
 }
 
 
-function rentalshow() {
-    let rentals = localStorage.getItem('rentItem');
+// function rentalshow() {
+//     let rentals = localStorage.getItem('rentItem');
 
-    // Try to parse the JSON, and handle potential parsing errors
-    try {
-        rentals = JSON.parse(rentals);
-    } catch (error) {
-        console.error("Error parsing rentals:", error);
-        rentals = []; // Default to an empty array if parsing fails
-    }
+//     // Try to parse the JSON, and handle potential parsing errors
+//     try {
+//         rentals = JSON.parse(rentals);
+//     } catch (error) {
+//         console.error("Error parsing rentals:", error);
+//         rentals = []; // Default to an empty array if parsing fails
+//     }
 
-    // Ensure rentals is an array
-    if (!Array.isArray(rentals)) {
-        rentals = [];
-    }
+//     // Ensure rentals is an array
+//     if (!Array.isArray(rentals)) {
+//         rentals = [];
+//     }
 
-    const rentalBody = document.getElementById('rental-body');
-    rentalBody.innerHTML = ''; // Clear existing rows
+//     const rentalBody = document.getElementById('rental-body');
+//     rentalBody.innerHTML = ''; // Clear existing rows
 
-    rentals.forEach(rental => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${rental.nic}</td>
-            <td>${rental.name}</td>
-            <td>${rental.phone}</td>
-            <td>${rental.email}</td>
-            <td>${rental.rentDate}</td>
-        `;
-        rentalBody.appendChild(row);
-    });
+//     rentals.forEach(rental => {
+//         const row = document.createElement('tr');
+//         row.innerHTML = `
+//             <td>${rental.nic}</td>
+//             <td>${rental.name}</td>
+//             <td>${rental.phone}</td>
+//             <td>${rental.email}</td>
+//             <td>${rental.rentDate}</td>
+//         `;
+//         rentalBody.appendChild(row);
+//     });
 
-    // Show the rental section and hide other sections
-    document.getElementById('dashboardcontainer').style.display = 'none';
-    document.getElementById('customerdcontainer').style.display = 'none';
-    document.getElementById('rentaldcontainer').style.display = 'block';
-    document.getElementById('overduedcontainer').style.display = 'none';
-    document.getElementById('returncontainer').style.display = 'none';
-    document.getElementById('display').style.display = 'none';
-}
+//     // Show the rental section and hide other sections
+//     document.getElementById('dashboardcontainer').style.display = 'none';
+//     document.getElementById('customerdcontainer').style.display = 'none';
+//     document.getElementById('rentaldcontainer').style.display = 'block';
+//     document.getElementById('overduedcontainer').style.display = 'none';
+//     document.getElementById('returncontainer').style.display = 'none';
+//     document.getElementById('display').style.display = 'none';
+// }
 
 
 
@@ -432,17 +432,12 @@ function overdueshow() {
 function loadPendingRentals() {
     const keys = Object.keys(localStorage);
     const pendingRentals = keys.filter(key => key.startsWith('rentItem'));
-    // console.log(pendingRentals);
-
-    // let rentals = localStorage.getItem('rentItem');
-
-
     pendingRentals.forEach(key => {
         const rentalRequest = JSON.parse(localStorage.getItem(key));
-        // console.log(rentalRequest)
+        // console.log(rentalRequest) //in the rental of the all array should assign in the rental request
         if (rentalRequest.status === 'pending') {
             displayRentalRequest(rentalRequest);
-            console.log(rentalRequest);
+            console.log("Displaying Rental Request:", rentalRequest);
         }
     });
 
@@ -458,7 +453,6 @@ function loadPendingRentals() {
 
 // Function to display each pending rental request in the manager's dashboard
 function displayRentalRequest(rentalRequest) {
-    rentalRequest.
     const rentalBody = document.getElementById('rental-body')
     rentalBody.innerHTML = ''; // Clear existing rows
     const row = document.createElement('tr');
