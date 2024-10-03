@@ -21,10 +21,11 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #faf8f8;
+      /* background: #faf8f8; */
       min-height: 100vh;
-      background-image: url(img/signup.jpg);
+      /* background-image: url(img/signup.jpg); */
       background-size: cover;
+      background-image: linear-gradient(to bottom, rgba(255, 0, 0, 0), #2980b9);
 
     }
 
@@ -35,7 +36,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #f92df3;
+      /* background-color: #f92df3; */
     }
 
     .container span {
@@ -43,9 +44,15 @@
       left: 0;
       width: 32px;
       height: 5px;
-      background: #2c4766;
+      /* background: #2c4766;
       border-radius: 8px;
       transform-origin: 150px;
+      transform: scale(2.2) rotate(calc(var(--i) * (360deg / 50)));
+      animation: animateBlink 1s linear infinite;
+      animation-delay: calc(var(--i) * (3s / 50)); */
+      background: #2c4766;
+      border-radius: 8px;
+      transform-origin: 128px;
       transform: scale(2.2) rotate(calc(var(--i) * (360deg / 50)));
       animation: animateBlink 1s linear infinite;
       animation-delay: calc(var(--i) * (3s / 50));
@@ -81,7 +88,8 @@
       width: 100%;
       height: 45px;
       border-radius: 45px;
-      background: #00fffc;
+      /* background: #00fffc; */
+      background-color: #0b355f;
       border: none;
       outline: none;
       cursor: pointer;
@@ -89,6 +97,7 @@
       color: #1f293a;
       font-weight: 600;
       margin-left: 10px;
+      color: #fff;
     }
 
     .signup-link {
@@ -99,7 +108,7 @@
 
     .signup-link a {
       font-size: 1em;
-      color: #f92df3;
+      color:  #0b355f;
       text-decoration: none;
       font-weight: 600;
     }
@@ -125,18 +134,37 @@
       border-radius: 4px;
     }
     .login-form {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    width: 300px;
-}
+      background: rgba(213, 241, 255, 0.25);
+      box-shadow: 0 8px 32px 0 rgba(204, 208, 255, 0.37);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(3px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 20px;
+      border-radius: 8px;
+    /* background: #fff; */
 
-.login-form h1 {
-    color: #6001d2;
-    font-size: 24px;
-    margin-bottom: 20px;
-}
+    }
+
+h2{
+      color: #0b355f;
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    .form{
+      width: 500px;
+    }
+
+    .signup-link{
+      font-size: 1.2rem;
+      font-family: 'Times New Roman', Times, serif;
+      font-weight: bold;
+    }
+
+    .signup-link a{
+      color: #0b355f;
+      font-size: 1.2rem;
+      font-family: 'Times New Roman', Times, serif;
+    }
   </style>
 
 </head>
@@ -145,7 +173,7 @@
   <div class="container">
     <div class="login-form" id="registerForm">
       <h2>Register</h2>
-      <form action="#">
+      <form action="#" class="form">
         <div class="input-group">
           <label>Username: </label>
           <input type="text" required id="registerUsername">
@@ -173,7 +201,7 @@
         </div>
         <button type="submit" class="btn">Register</button>
         <div class="signup-link">
-          <a href="login.html">Sign in</a>
+          Already have an Account? <a href="login.html">Sign in</a>
         </div>
       </form>
     </div>
