@@ -28,7 +28,7 @@
  html {
      font-size: 62.5%;
      overflow-x: hidden;
-     color: #0b355f, #0071BC,#FFFFFF,#3993DD,#00C2CC,#FF8C00;
+     
 
  }
 
@@ -299,8 +299,9 @@ section {
      justify-content: center;
      align-items: center;
      gap: 2rem;
-     background-color: var(--second-bg-color);
-     background-image: url(img/movie-detail-bg.png);
+     background-color: black;
+     /* background-image: url(img/movie-detail-bg.png); */
+
  }
 
  .about-img img {
@@ -328,7 +329,8 @@ section {
 
  .service {
      min-height: 95vh;
-     background-image: url(img/bg.jpg);
+     /* background-image: url(img/tv-series-bg.jpg); */
+     background-color: black;
      background-repeat: no-repeat;
      background-size: cover;
      color: whitesmoke;
@@ -374,6 +376,53 @@ section {
      font-size: 1.6rem;
      margin: 1rem 0 3rem;
  }
+
+ .BCard h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 50px;
+}
+
+.banner-image {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.banner-card {
+    background-color:#3993DD ;
+    padding: 20px;
+    text-align: center;
+    width: 250px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.banner-card img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+}
+
+.banner-card h2 {
+    font-size: 1.7rem;
+    margin-bottom: 10px;
+    font-weight: bolder;
+}
+
+.banner-card p {
+    font-size: 1rem;
+    color: #ffffff;
+}
+
+.banner-card:hover {
+    transform: translateY(-10px);
+}
+
+
+
 
  .rent {
      /* background-color: var(--second-bg-color); */
@@ -421,7 +470,8 @@ section {
     margin-left: 10px;
   }
 .reviews{
-    background-image: url(img/rev.jpg);
+    /* background-image: url(img/rev.jpg); */
+    background-color: #000;
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -609,9 +659,9 @@ color: #000000;
 
 .signup-container {
     position: absolute;
-    bottom: 100px;
+    bottom: 400px;
     /* Position the button at the bottom of the slider */
-    right: 1000px;
+    left:200px;
     /* Position the button towards the right */
     z-index: 10;
 }
@@ -634,7 +684,7 @@ color: #000000;
 .description {
     position: absolute;
     z-index: 10;
-    bottom: 200px;
+    bottom: 500px;
     /* Position the button at the bottom of the slider */
     right: 300px;
     left: 200px;
@@ -643,17 +693,21 @@ color: #000000;
 
 .description p {
     color: white;
-    font-size: large;
-    color: #7caa9a;
+    font-size: 20px;
+    color: white;
+
 
 }
 
-.description h3::first-letter {
-    color: #7caa9a;
-}
+/* .description h1::first-letter {
+    color: #0b355f;
+    
+} */
 
-.description h3 {
-    font-size: xx-large;
+.description h1 {
+    
+    font-size: 70px;
+    color: #0b355f;
 
 }
 
