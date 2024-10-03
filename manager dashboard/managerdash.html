@@ -16,8 +16,8 @@
             <div class="img"><img src="../img/logo C.png" alt=""></div>
             <p class="logo_name">Cine</p>
             <p class="logo_name">Cafe</p>
-
         </div>
+        
 
         <div class="navbar">
             <ul>
@@ -26,9 +26,8 @@
                 </li>
                 <li><a href="#" onclick="customershow()"><i class="bi bi-chat-right-text"></i><span>Customer</span></a>
                 </li>
-                <!-- <li><a href="#" onclick="customerupdate()"><i class="bi bi-card-text"></i><span>Update customer</span></a></li> -->
                 <li><a href="#" id="displaydvd"><i class="bi bi-shop"></i><span>Invetory</span> ></a></li>
-                <li><a href="#" onclick="rentalshow()"><i class="bi bi-graph-up-arrow"></i><span>Rental</span></a></li>
+                <li><a href="#" onclick="loadPendingRentals()"><i class="bi bi-graph-up-arrow"></i><span>Rental</span></a></li>
                 <li><a href="#" onclick="overdueshow()"><i class="bi bi-cart"></i><span>Overdue</span></a></li>
                 <li><a href="#" onclick="returnshow()"><i class="bi bi-cart"></i><span>Return</span></a></li>
 
@@ -117,6 +116,8 @@
         </table>
     </section>
 
+    <!-- for renntal details -->
+
     <section class="rental-container" id="rentaldcontainer" style="display: none;">
         <h2 style="margin-left:50px ;">Rental</h2>
         <table id="rental-table">
@@ -130,7 +131,7 @@
                 </tr>
             </thead>
             <tbody id="rental-body">
-                <!-- Customer details will be displayed here -->
+                <!-- Customer  rental  details will be displayed here -->
             </tbody>
         </table>
     </section>

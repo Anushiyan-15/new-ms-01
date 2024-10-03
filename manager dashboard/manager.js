@@ -190,14 +190,14 @@ function customerupdate(){
 
 
 // rental show function
-// function rentalshow() {
-//     document.getElementById('dashboardcontainer').style.display = 'none';
-//     document.getElementById('customerdcontainer').style.display = 'none';
-//     document.getElementById('rentaldcontainer').style.display = 'block';
-//     document.getElementById('overduedcontainer').style.display = 'none';
-//     document.getElementById('returncontainer').style.display = 'none';
-//     
-// }
+function rentalshow() {
+    document.getElementById('dashboardcontainer').style.display = 'none';
+    document.getElementById('customerdcontainer').style.display = 'none';
+    document.getElementById('rentaldcontainer').style.display = 'block';
+    document.getElementById('overduedcontainer').style.display = 'none';
+    document.getElementById('returncontainer').style.display = 'none';
+    
+}
 
 // function displayrentals() {
     
@@ -208,7 +208,7 @@ function customerupdate(){
 //     rentals.forEach(rental => {
 //         const row = document.createElement('tr');
 //         row.innerHTML = `
-//             <td>${customers.nic}</td>
+//             <td>${rental.nic}</td>
 //             <td>${rental.name}</td>
 //             <td>${rental.number}</td>   
 //           <td>${rental.rentDate}</td>
@@ -309,7 +309,21 @@ function returnshow() {
 
 
 function rentalshow() {
-    const rentals = JSON.parse(localStorage.getItem('rentItem')) || [];
+    let rentals = localStorage.getItem('rentItem');
+
+    // Try to parse the JSON, and handle potential parsing errors
+    try {
+        rentals = JSON.parse(rentals);
+    } catch (error) {
+        console.error("Error parsing rentals:", error);
+        rentals = []; // Default to an empty array if parsing fails
+    }
+
+    // Ensure rentals is an array
+    if (!Array.isArray(rentals)) {
+        rentals = [];
+    }
+
     const rentalBody = document.getElementById('rental-body');
     rentalBody.innerHTML = ''; // Clear existing rows
 
@@ -331,7 +345,7 @@ function rentalshow() {
     document.getElementById('rentaldcontainer').style.display = 'block';
     document.getElementById('overduedcontainer').style.display = 'none';
     document.getElementById('returncontainer').style.display = 'none';
-    document.getElementById('display').style.display='none';
+    document.getElementById('display').style.display = 'none';
 }
 
 
@@ -417,26 +431,43 @@ function overdueshow() {
 // Function to load pending rental requests from localStorage
 function loadPendingRentals() {
     const keys = Object.keys(localStorage);
-    const pendingRentals = keys.filter(key => key.startsWith('rentRequest-'));
+    const pendingRentals = keys.filter(key => key.startsWith('rentItem'));
+    // console.log(pendingRentals);
+
+    // let rentals = localStorage.getItem('rentItem');
+
 
     pendingRentals.forEach(key => {
         const rentalRequest = JSON.parse(localStorage.getItem(key));
+        // console.log(rentalRequest)
         if (rentalRequest.status === 'pending') {
             displayRentalRequest(rentalRequest);
+            console.log(rentalRequest);
         }
     });
+
+        // Show the rental section and hide other sections
+        document.getElementById('dashboardcontainer').style.display = 'none';
+        document.getElementById('customerdcontainer').style.display = 'none';
+        document.getElementById('rentaldcontainer').style.display = 'block';
+        document.getElementById('overduedcontainer').style.display = 'none';
+        document.getElementById('returncontainer').style.display = 'none';
+        document.getElementById('display').style.display = 'none';
+
 }
 
 // Function to display each pending rental request in the manager's dashboard
 function displayRentalRequest(rentalRequest) {
-    const rentalDiv = document.createElement('div');
-    rentalDiv.innerHTML = `
-        <p>DVD: ${rentalRequest.dvdTitle}</p>
-        <p>Status: ${rentalRequest.status}</p>
-        <button onclick="approveRental('${rentalRequest.dvdId}')">Approve</button>
-        <button onclick="declineRental('${rentalRequest.dvdId}')">Decline</button>
+    rentalRequest.
+    const rentalBody = document.getElementById('rental-body')
+    rentalBody.innerHTML = ''; // Clear existing rows
+    const row = document.createElement('tr');
+    row.innerHTML = `
+        <td>${rentalRequest.NIC}
+        <td>${rentalRequest.title}</td>
+        <td>${rentalRequest.status}</td>
     `;
-    document.body.appendChild(rentalDiv);  // Append to the manager's dashboard UI
+    rentalBody.appendChild(row);  // Append to the manager's dashboard UI
 }
 
 // Function to approve the rental request
@@ -444,7 +475,7 @@ function approveRental(dvdId) {
     const rentalRequest = JSON.parse(localStorage.getItem(`rentRequest-${dvdId}`));
     rentalRequest.status = 'approved';
     localStorage.setItem(`rentRequest-${dvdId}`, JSON.stringify(rentalRequest));
-    alert(`Rental for "${rentalRequest.dvdTitle}" has been approved!`);
+    alert(`Rental for "${rentalRequest.title}" has been approved!`);
     // Reload the page or remove the request from the UI
 }
 
@@ -456,4 +487,4 @@ function declineRental(dvdId) {
 }
 
 // Call this function to load pending rentals on page load
-window.onload = loadPendingRentals;
+// window.onload = loadPendingRentals;
