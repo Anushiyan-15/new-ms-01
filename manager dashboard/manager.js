@@ -6,19 +6,19 @@ function dashboardshow() {
     document.getElementById('rentaldcontainer').style.display = 'none';
     document.getElementById('overduedcontainer').style.display = 'none';
     document.getElementById('returncontainer').style.display = 'none';
-    document.getElementById('display').style.display='none';
-  
+    document.getElementById('display').style.display = 'none';
+
 }
 
-function homepage(){
-    
+function homepage() {
+
     document.getElementById('dashboardcontainer').style.display = 'none';
     document.getElementById('customerdcontainer').style.display = 'none';
     document.getElementById('rentaldcontainer').style.display = 'none';
     document.getElementById('overduedcontainer').style.display = 'none';
     document.getElementById('returncontainer').style.display = 'none';
-    document.getElementById('display').style.display='none';
-  
+    document.getElementById('display').style.display = 'none';
+
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -32,14 +32,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Function to display Dvds in the table
 
-    document.getElementById('displaydvd').addEventListener('click',displayDvd);
+    document.getElementById('displaydvd').addEventListener('click', displayDvd);
     function displayDvd() {
         document.getElementById('dashboardcontainer').style.display = 'none';
         document.getElementById('customerdcontainer').style.display = 'none';
         document.getElementById('rentaldcontainer').style.display = 'none';
         document.getElementById('overduedcontainer').style.display = 'none';
         document.getElementById('returncontainer').style.display = 'none';
-        document.getElementById('display').style.display='block';
+        document.getElementById('display').style.display = 'block';
 
 
         const Dvd = JSON.parse(localStorage.getItem('Dvds')) || [];
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 Dvd.splice(index, 1);
                 localStorage.setItem('Dvds', JSON.stringify(Dvd));
                 displayDvd();
-                
+
             });
 
         });
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const title = document.getElementById('add-Dvd-title').value.trim();
         const Director = document.getElementById('add-Dvd-Director').value.trim();
-        const id = Number(Math.floor(Math.random()*1000));
+        const id = Number(Math.floor(Math.random() * 1000));
         console.log(id);
         const category = document.getElementById('add-Dvd-category').value.trim();
         const Date = document.getElementById('add-dvd-date').value.trim();
@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const Dvd = JSON.parse(localStorage.getItem('Dvds')) || [];
 
             // Add new Dvd to the array
-            Dvd.push({ image: base64Image, title, Director, category, Date, quantity,id});
+            Dvd.push({ image: base64Image, title, Director, category, Date, quantity, id });
 
             // Store updated array back in localStorage
             localStorage.setItem('Dvds', JSON.stringify(Dvd));// set local storage for Dvd
@@ -133,8 +133,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Initialize DVD and display them
     initializeDvd();
-   
-    
+
+
 });
 
 
@@ -146,7 +146,7 @@ function customershow() {
     document.getElementById('rentaldcontainer').style.display = 'none';
     document.getElementById('overduedcontainer').style.display = 'none';
     document.getElementById('returncontainer').style.display = 'none';
-    document.getElementById('display').style.display='none';
+    document.getElementById('display').style.display = 'none';
 
 }
 function displayCustomers() {
@@ -177,14 +177,14 @@ displayCustomers();
 // Load customers on page load
 window.onload = displayCustomers;
 
-function customerupdate(){
+function customerupdate() {
     document.getElementById('customerdcontainer').style.display = 'block';
     document.getElementById('dashboardcontainer').style.display = 'none';
     document.getElementById('rentaldcontainer').style.display = 'none';
     document.getElementById('overduedcontainer').style.display = 'none';
     document.getElementById('returncontainer').style.display = 'none';
-    document.getElementById('display').style.display='none';
-    document.getElementById('updatedcontainer').style.display='block'
+    document.getElementById('display').style.display = 'none';
+    document.getElementById('updatedcontainer').style.display = 'block'
 
 }
 
@@ -196,11 +196,11 @@ function rentalshow() {
     document.getElementById('rentaldcontainer').style.display = 'block';
     document.getElementById('overduedcontainer').style.display = 'none';
     document.getElementById('returncontainer').style.display = 'none';
-    
+
 }
 
 // function displayrentals() {
-    
+
 //     let rentals = JSON.parse(localStorage.getItem('rentItem')) || [];
 //     const rentalTable = document.getElementById('rental-body');
 //     rentalTable.innerHTML = '';
@@ -278,7 +278,7 @@ function returnshow() {
     document.getElementById('rentaldcontainer').style.display = 'none';
     document.getElementById('overduedcontainer').style.display = 'none';
     document.getElementById('returncontainer').style.display = 'block';
-    document.getElementById('display').style.display='none';
+    document.getElementById('display').style.display = 'none';
 
 
     function returnMotorbike() {
@@ -425,7 +425,7 @@ function overdueshow() {
     document.getElementById('rentaldcontainer').style.display = 'none';
     document.getElementById('overduedcontainer').style.display = 'block';
     document.getElementById('returncontainer').style.display = 'none';
-    document.getElementById('display').style.display='none';
+    document.getElementById('display').style.display = 'none';
 }
 
 // Function to load pending rental requests from localStorage
@@ -435,33 +435,32 @@ function loadPendingRentals() {
     pendingRentals.forEach(key => {
         const rentalRequest = JSON.parse(localStorage.getItem(key));
         // console.log(rentalRequest)
-        
-        rentalRequest.forEach(e=>{
+
+        rentalRequest.forEach(e => {
             if (e.status === 'pending') {
                 displayRentalRequest(e);
-                console.log("Displaying Rental Request:", e);
+                // console.log("Displaying Rental Request:", e);
             }
         })//in the rental of the all array should assign in the rental request
-       
+
     });
 
-        // Show the rental section and hide other sections
-        document.getElementById('dashboardcontainer').style.display = 'none';
-        document.getElementById('customerdcontainer').style.display = 'none';
-        document.getElementById('rentaldcontainer').style.display = 'block';
-        document.getElementById('overduedcontainer').style.display = 'none';
-        document.getElementById('returncontainer').style.display = 'none';
-        document.getElementById('display').style.display = 'none';
+    // Show the rental section and hide other sections
+    document.getElementById('dashboardcontainer').style.display = 'none';
+    document.getElementById('customerdcontainer').style.display = 'none';
+    document.getElementById('rentaldcontainer').style.display = 'block';
+    document.getElementById('overduedcontainer').style.display = 'none';
+    document.getElementById('returncontainer').style.display = 'none';
+    document.getElementById('display').style.display = 'none';
 
 }
 // Function to display each pending rental request in the manager's dashboard
 function displayRentalRequest(rentalRequest) {
-// console.log(rentalRequest)
+     console.log(rentalRequest)
 
     const rentalBody = document.getElementById('rental-body')
-    rentalBody.innerHTML = ''; // Clear existing rows
-    const row = document.createElement('tr');
-    row.innerHTML = `
+   
+    rentalBody.innerHTML += `<tr>
         <td>${rentalRequest.NIC}</td>
         <td>${rentalRequest.user}</td>
         <td>${rentalRequest.title}</td>
@@ -469,8 +468,9 @@ function displayRentalRequest(rentalRequest) {
         <td>${rentalRequest.rentdate}</td>
         <td> <button onclick="approveRental('${rentalRequest.dvdid}')">Approve</button>
         <button onclick="declineRental('${rentalRequest.dvdid}')">Decline</button></td>
+        </tr>
     `;
-    rentalBody.appendChild(row);  // Append to the manager's dashboard UI
+    //rentalBody.appendChild(row);  // Append to the manager's dashboard UI
 }
 
 // Function to approve the rental request
@@ -483,22 +483,55 @@ function displayRentalRequest(rentalRequest) {
 // }
 
 
-function approveRental(dvdid) {
-    const rentalItemKey = `${dvdid}`;
-    // console.log(rentalItemKey);
-    const rentalRequest = JSON.parse(localStorage.getItem(rentalItemKey));
+// function approveRental(dvdid) {
+//     const rentalItemKey = `${dvdid}`;
+//     // console.log(rentalItemKey);
+//     const rentalRequest = JSON.parse(localStorage.getItem(rentalItemKey));
 
-    if (!rentalRequest) {
-        alert(`Rental request for DVD ID "${dvdid}" not found.`);
-        return;
-    }
+//     if (!rentalRequest) {
+//         alert(`Rental request for DVD ID "${dvdid}" not found.`);
+//         return;
+//     }
 
-    rentalRequest.status = 'approved';
-    localStorage.setItem(rentalItemKey, JSON.stringify(rentalRequest));
-    alert(`Rental for "${rentalRequest.title}" has been approved!`);
-    
+//     rentalRequest.status = 'approved';
+//     localStorage.setItem(rentalItemKey, JSON.stringify(rentalRequest));
+//     alert(`Rental for "${rentalRequest.title}" has been approved!`);
+
+//     // Reload the page or remove the request from the UI
+//     location.reload(); // Optional: reloads the page to reflect the changes
+// }
+
+
+function approveRental(Request) {
+    console.log(Request);
+
+    const keys = Object.keys(localStorage);
+
+    //  const pendingRentals = keys.filter(key => key.startsWith('rentItem'));
+    //  console.log(pendingRentals);
+    let pendingRentals = JSON.parse(localStorage.getItem('rentItem'));
+    console.log(pendingRentals)
+
+
+    pendingRentals.forEach(e => {
+        if (e.status === 'pending' && e.dvdid == Request) {
+            e.status = 'Approved';
+            console.log(e);
+        }
+        localStorage.setItem('rentItem' , JSON.stringify(pendingRentals));
+    })//in the rental of the all array should assign in the rental request
+
+
+
+
+    const rentalItemKey = Request;
+
+    localStorage.setItem(rentalItemKey, JSON.stringify(Request));
+    alert(`Rental for "${Request.title}" has been approved!`);
+
     // Reload the page or remove the request from the UI
     location.reload(); // Optional: reloads the page to reflect the changes
+
 }
 
 
