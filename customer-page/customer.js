@@ -42,6 +42,7 @@ function showdvd() {
   }
 
   displayDvd();
+  // location.reload();
 }
 
 window.onload = showdvd();
@@ -368,6 +369,8 @@ function showProfile() {
     // Change button text after enabling edit
     document.getElementById("updateButton").innerText = "save details";
     document.getElementById("updateButton").onclick = saveDetails;
+
+
   }
 
   // Function to save updated details back to localStorage
