@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- Head -->
 <head>
     <meta charset="UTF-8">
     <link rel="shortcut icon" type="x-icon" href="logo.png">
@@ -11,34 +12,33 @@
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../forrent-poup.css">
     <link rel="stylesheet" href="review.css">
-
     <style>
-        #label{
+        #label {
             font-size: 9px;
         }
 
-        .quan{
+        .quan {
             width: 100px;
         }
     </style>
 </head>
-
+<!-- BODY -->
 <body>
-    <!-- header design -->
+    <!-- HEADER(LOGO,NAVBAR) -->
     <header class="header">
         <img src="../pngwing.com.png" alt="logo" class="logo">
         <i class='bx bx-menu' id="menu-icon"></i>
-
+        <!-- navbar -->
         <nav class="navbar">
             <a href="#Rent">Home</a>
             <a href="#reviews">Review</a>
             <a href="#Profile" id="userInfo">Profile</a>
             <a href="#" id="addReviewLink">Add_comments</a>
             <a href="#logout" id="logoutBtn">Log out</a>
-
         </nav>
-
     </header>
+
+    <!-- RENT DVDs(FILTER,DVDs) -->
     <section class="rent" id="Rent" style="display: block;">
         <h2 class="heading"> <span>Dvd</span></h2>
         <div class="search-filter">
@@ -53,15 +53,12 @@
         <div id="videoList" class="video-list">
             <!-- Videos will be dynamically inserted here -->
         </div>
-
-
         <div class="rent-container" id="rent-container">
             <!-- Cards will be inserted here -->
         </div>
     </section>
 
-                <!-- for profile add form -->
-
+    <!-- CUSTOMER PROFILE UPDATE FORM -->
     <section id="Profile" class="modal">
         <div class="modal-content">
             <span class="close" id="closebutton">&times;</span>
@@ -88,21 +85,17 @@
                     <div id="msg" class="box"></div>
                 </form>
             </div>
-            
         </div>
     </section>
 
-    <!-- for rent popup when click rent button in the card -->
-
+    <!-- POPUP SHOWS WHEN CLICK ON THE RENT BUTTON -->
     <section id="rentpopup" class="modal">
         <div class="modal-content">
             <span class="close" id="closebutton">&times;</span>
             <div class="profile-container">
-
                 <!-- Rent Popup Details -->
-
                 <div id="popup-details">
-                    <img id="popup-image" src="" alt="Item Image" >
+                    <img id="popup-image" src="" alt="Item Image">
                     <h2 id="popup-title"></h2>
                     <p id="popup-description"></p>
                     <button class="rent-confirm-btn" id="saveDetails">Confirm Rent</button>
@@ -111,19 +104,15 @@
         </div>
     </section>
 
-
-    <!-- Review section -->
-
+    <!-- REVIEWS -->
     <section class="reviews" id="reviews">
         <div class="heading">
             <h3>Our Customers <span>Review using this web site </span></h3>
-
         </div>
         <div class="reviews-container">
-
             <div class="box">
                 <div class="rev-img">
-                    <img src="../img/avatar.png" alt="">
+                    <img src="../img/Avatar/avatar.png" alt="">
                 </div>
                 <h1>Confusius Anushiyan</h1>
                 <div class="stars">
@@ -142,7 +131,7 @@
 
             <div class="box">
                 <div class="rev-img">
-                    <img src="../img/avatar1.png" alt="">
+                    <img src="../img/Avatar/avatar1.png" alt="">
                 </div>
                 <h1>SandraKumar Joel</h1>
                 <div class="stars">
@@ -161,7 +150,7 @@
 
             <div class="box">
                 <div class="rev-img">
-                    <img src="../img/avatar2.jpeg" alt="">
+                    <img src="../img/Avatar/avatar2.jpeg" alt="">
                 </div>
                 <h1>thangam Janushika</h1>
                 <div class="stars">
@@ -177,10 +166,8 @@
                     it’s a convenient option when I want to rent something. I probably won’t subscribe regularly, but
                     it’s good for occasional use.</p>
             </div>
-
         </div>
     </section>
-
     <!-- Review Form Modal -->
     <div id="reviewModal" class="modal1" style="display: none;">
         <div class="modal-content1">
@@ -202,10 +189,8 @@
                     <option value="4">4 Stars</option>
                     <option value="5">5 Stars</option>
                 </select>
-
                 <label for="review">Review:</label>
                 <textarea id="review" name="review" rows="5" required></textarea>
-
                 <button type="submit">Submit Review</button>
             </form>
             <div id="message"></div>
@@ -214,10 +199,8 @@
     <!-- <div id="dvd-list"></div>
     <div id="dvd-details"></div> -->
 
-
-
-    <footer id="Contact">
-
+<!-- FOOTER -->
+    <footer id="Contact" class="footer">
         <div>
             <p>Uchiha_MadaraDVD@gmail.com</p>
         </div>
@@ -226,17 +209,12 @@
         </div>
         <div>
             <p>0712304466</p>
-
         </div>
-
     </footer>
 
-
-
-
+    <!-- SCRIPTS -->
     <script src="../login.js"></script>
     <script src="customer.js"></script>
-
 </body>
 
 </html>
