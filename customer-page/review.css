@@ -74,7 +74,7 @@
     padding: 10px 15px;
     border: none;
     border-radius: 4px;
-    background-color: #28a745;
+    background-color:#3993DD;
     color: #fff;
     font-size: 16px;
     cursor: pointer;
@@ -83,7 +83,7 @@
 }
 
 .modal1 button[type="submit"]:hover {
-    background-color: #218838;
+    background-color: #3993DD;
 }
 
 /* Message Styling */
