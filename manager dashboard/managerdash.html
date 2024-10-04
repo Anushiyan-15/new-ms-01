@@ -13,9 +13,9 @@
 <body>
     <div class="container" id="container">
         <div class="brand">
-            <div class="img"><img src="../img/logo C.png" alt=""></div>
-            <p class="logo_name">Cine</p>
-            <p class="logo_name">Cafe</p>
+            <div class="img"><img src="../img/Other/logo.jpg" alt=""></div>
+            <h1 class="logo_name">Cine</h1>
+            <h1 class="logo_name">Cafe</h1>
         </div>
         
 
@@ -24,13 +24,13 @@
                 <li><a href="#" onclick="homepage()"><i class="bi bi-house"> </i><span>Home</span></a></li>
                 <li><a href="#" onclick="dashboardshow()"><i class="bi bi-plus-circle"></i></i><span>Add Dvd</span></a>
                 </li>
-                <li><a href="#" onclick="customershow()"><i class="bi bi-chat-right-text"></i><span>Customer</span></a>
+                <li><a href="#" onclick="customershow()"><i class="bi bi-people"></i><span>Customer</span></a>
                 </li>
-                <li><a href="#" id="displaydvd"><i class="bi bi-shop"></i><span>Invetory</span> ></a></li>
+                <li><a href="#" id="displaydvd"><i class="bi bi-collection"></i><span>Invetory</span> </a></li>
                 <li><a href="#" onclick="loadPendingRentals()"><i class="bi bi-graph-up-arrow"></i><span>Rental</span></a></li>
-                <li><a href="#" onclick="overdueshow()"><i class="bi bi-cart"></i><span>Overdue</span></a></li>
-                <li><a href="#" onclick="returnshow()"><i class="bi bi-cart"></i><span>Return</span></a></li>
-
+                <li><a href="#" onclick="overdueshow()"><i class="bi bi-exclamation-circle"></i><span>Overdue</span></a></li>
+                <li><a href="#" onclick="returnshow()"><i class="bi bi-arrow-return-left"></i><span>Return</span></a></li>
+                <li><a href="#" onclick="Reports()"><i class="bi bi-table"></i><span>Reports</span></a></li>
         </div>
 
 
@@ -44,7 +44,7 @@
         <h1>Dvd Manage</h1>
 
         <form id="add-Dvd-form">
-            <h2>Add Dvd</h2>
+            <!-- <h2>Add Dvd</h2> -->
 
 
             <input type="text" id="add-Dvd-title" placeholder="Dvd Title" required>
@@ -61,7 +61,7 @@
 
 
     <section class="customer-container" id="customerdcontainer" style="display: none;">
-        <h2 style="margin-left:50px ;">Registered Customers</h2>
+        <h2 style="margin-left:50px ; color: #0b355f;">Registered Customers</h2>
         <table id="customer-table">
             <thead>
                 <tr>
@@ -98,7 +98,7 @@
     <section style="display: none;" id="display" class="displaycontainer" >
 
         <h2 style="margin-left:50px ;">Inventory Dvds</h2>
-        <table id="Dvds-table"  style="border: 2px solid black; border-color: red;">
+        <table id="Dvds-table">
             <thead>
                 <tr>
                     <th>Image</th>
