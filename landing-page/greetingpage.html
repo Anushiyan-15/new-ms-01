@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- HEAD -->
+
 <head>
     <meta charset="UTF-8">
     <link rel="shortcut icon" type="x-icon" href="logo.png">
@@ -10,10 +12,11 @@
     <!-- css style -->
     <link rel="stylesheet" href="../style.css">
 </head>
-<!-- Body section -->
+<!-- BODY -->
+
 <body>
     <!-- <div class="popup"></div> -->
-    <!-- header design -->
+    <!-- HEADER-->
     <header class="header">
         <!-- <img src="../img/logo C.png" alt="logo" class="logo"> -->
         <h1 class="logotext">Cine Cafe</h1>
@@ -27,7 +30,7 @@
         </nav>
     </header>
 
-    <!-- home section design -->
+    <!-- HOME -->
     <div class="home" id="Home">
         <!-- <div class="home-content"> -->
         <!-- <h3>Welcome to Film library</h3>
@@ -41,12 +44,13 @@
         <!-- </div>-->
         <div class="slider">
             <div class="slides">
-                <img src="../img/Slider/Slider2.jpg" alt="DVD 1" class="slide active">
-                <img src="../img/Slider/Slider1.jpg" alt="DVD 2" class="slide">
-                <img src="../img/Slider/Slider3.jpg" alt="DVD 3" class="slide">
-                <img src="../img/Slider/Slider4.jpg" alt="DVD 4" class="slide">
-                <img src="../img/Slider/slider5.jpg" alt="DVD 5" class="slide">
+                <img src="../img/Slider/bg_01.jpg" alt="DVD 1" class="slide active">
+                <img src="../img/Slider/bg_02.jpg" alt="DVD 2" class="slide">
+                <img src="../img/Slider/bg_03.jpg" alt="DVD 3" class="slide">
+                <img src="../img/Slider/bg_04.jpg" alt="DVD 4" class="slide">
+                <img src="../img/Slider/bg_03.jpg" alt="DVD 5" class="slide">
             </div>
+
             <div class="pagination">
                 <span class="dot active" onclick="currentSlide(0)"></span>
                 <span class="dot" onclick="currentSlide(1)"></span>
@@ -54,17 +58,8 @@
                 <span class="dot" onclick="currentSlide(3)"></span>
                 <span class="dot" onclick="currentSlide(4)"></span>
             </div>
-            <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
-            <button class="next" onclick="changeSlide(1)">&#10095;</button>
-
-
-            <!-- Sign Up button inside the slider -->
-            <div class="signup-container">
-                <!-- <button class="signup-btn">Sign Up</button> -->
-                <a href="../login.html" class="btn" id="Signin">Sign In</a>
-                <a href="../regiter.html" class="btn" id="Signup">Sign Up</a>
-            </div>
-
+            <!-- <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+            <button class="next" onclick="changeSlide(1)">&#10095;</button> -->
             <div class="description">
                 <h1>Cine Cafe</h1>
                 <p>Discover a world of entertainment with our vast selection of DVDs. Whether you're looking for the
@@ -72,25 +67,28 @@
                     rentals, unbeatable prices, and exceptional customer service. Your movie night just got better!
                 </p>
             </div>
-
-
-
+            <!-- Sign Up button inside the slider -->
+            <div class="signup-container">
+                <!-- <button class="signup-btn">Sign Up</button> -->
+                <a href="../login.html" class="btn" id="Signin">Sign In</a>
+                <a href="../register.html" class="btn" id="Signup">Sign Up</a>
+            </div>            
         </div>
         <!-- </div> -->
     </div>
 
+    <!-- RENT -->
     <section class="rent" id="Rent">
         <h2 class="heading">Rent <span>Dvd</span></h2>
         <div class="rent-container" id="rent-container">
-
             <!--Add Dvd Cards will be inserted here -->
         </div>
     </section>
 
-    <!-- About section-->
+    <!-- ABOUT -->
     <section class="about" id="About">
         <div class="about-img">
-            <img src="../img/service.jpg" alt="#">
+            <img src="../img/about.png" alt="#">
         </div>
 
         <div class="about-content">
@@ -99,11 +97,9 @@
             <p>Welcome to Cine Cafe , your ultimate film library packed with an extensive collection of movies!</p>
             <a href="" class="btn">Read more</a>
         </div>
-
     </section>
 
-
-
+    <!-- SERVICE -->
     <section class="service" id="Service">
         <h2 class="heading">Our Services</h2>
         <div class="service-container">
@@ -122,39 +118,32 @@
                 <a href="#" class="btn">Read More</a>
             </div>
         </div>
-        
-    <section class="BCard">
-        <h1><u>HOW IT WORKS</u></h1>
-        <div class="banner-image">
-            <div class="banner-card">
-                <img src="../img/choose.png" alt="choice">
-                <h2>CHOOSE</h2>
-                <p>Create your list of titles online choosing from over 100,000 titles</p>
-            </div>
-            <div class="banner-card">
-                <img src="../img/recive.png" alt="rent">
-                <h2>RECEIVE</h2>
-                <p>Receive discs at our shop</p>
-            </div>
-            <div class="banner-card">
-                <img src="../img/watch.png" alt="watch">
-                <h2>WATCH</h2>
-                <p>Keep each disc as long as you want.</p>
-            </div>
-            <div class="banner-card">
-                <img src="../img/return.png" alt="return">
-                <h2>RETURN</h2>
-                <p>Return a disc in a prepaid envelope to get a replacement</p>
+        <div class="BCard">
+            <h1><u>HOW IT WORKS</u></h1>
+            <div class="banner-image">
+                <div class="banner-card">
+                    <img src="../img/Flow/choose.png" alt="choice">
+                    <h2>CHOOSE</h2>
+                    <p>Create your list of titles online choosing from over 100,000 titles</p>
+                </div>
+                <div class="banner-card">
+                    <img src="../img/Flow/recive.png" alt="rent">
+                    <h2>RECEIVE</h2>
+                    <p>Receive discs at our shop</p>
+                </div>
+                <div class="banner-card">
+                    <img src="../img/Flow/watch.png" alt="watch">
+                    <h2>WATCH</h2>
+                    <p>Keep each disc as long as you want.</p>
+                </div>
+                <div class="banner-card">
+                    <img src="../img/Flow/return.png" alt="return">
+                    <h2>RETURN</h2>
+                    <p>Return a disc in a prepaid envelope to get a replacement</p>
+                </div>
             </div>
         </div>
     </section>
-    </section>
-
-
-
-
-
-
 
     <!-- <div class="card">
         <img src="movie1.jpg" alt="Movie 1">
@@ -167,21 +156,15 @@
         </div>
       </div> -->
 
-
-
-
-    <!-- Review section -->
-
+    <!-- REVIEWS -->
     <section class="reviews" id="reviews">
         <div class="heading">
             <h3>Our Customers <span>Thoughts</span></h3>
-
         </div>
         <div class="reviews-container">
-
             <div class="box">
                 <div class="rev-img">
-                    <img src="../img/avatar.png" alt="">
+                    <img src="../img/Avatar/avatar.png" alt="">
                 </div>
                 <h1>Confusius Anushiyan</h1>
                 <div class="stars">
@@ -200,7 +183,7 @@
 
             <div class="box">
                 <div class="rev-img">
-                    <img src="../img/avatar1.png" alt="">
+                    <img src="../img/Avatar/avatar1.png" alt="">
                 </div>
                 <h1>SandraKumar Joel</h1>
                 <div class="stars">
@@ -219,9 +202,9 @@
 
             <div class="box">
                 <div class="rev-img">
-                    <img src="../img/avatar2.jpeg" alt="">
+                    <img src="../img/Avatar/avatar2.jpeg" alt="">
                 </div>
-                <h1>thangam Janushika</h1>
+                <h1>John Mike</h1>
                 <div class="stars">
                     <i class='bx bxs-star'></i>
                     <i class='bx bxs-star'></i>
@@ -235,12 +218,11 @@
                     it’s a convenient option when I want to rent something. I probably won’t subscribe regularly, but
                     it’s good for occasional use.</p>
             </div>
-
         </div>
     </section>
 
-    <footer id="Contact">
-
+    <!-- FOOTER -->
+    <footer id="Contact" class="footer">
         <div>
             <p>Madara_uchiha@gmail.com</p>
         </div>
@@ -249,14 +231,11 @@
         </div>
         <div>
             <p>0712304466</p>
-
         </div>
-
     </footer>
 
-
+    <!-- SCRIPT -->
     <script src="javascript.js"></script>
-
 </body>
 
 </html>
