@@ -293,46 +293,6 @@ function returnshow() {
   }
 }
 
-// function rentalshow() {
-//     let rentals = localStorage.getItem('rentItem');
-
-//     // Try to parse the JSON, and handle potential parsing errors
-//     try {
-//         rentals = JSON.parse(rentals);
-//     } catch (error) {
-//         console.error("Error parsing rentals:", error);
-//         rentals = []; // Default to an empty array if parsing fails
-//     }
-
-//     // Ensure rentals is an array
-//     if (!Array.isArray(rentals)) {
-//         rentals = [];
-//     }
-
-//     const rentalBody = document.getElementById('rental-body');
-//     rentalBody.innerHTML = ''; // Clear existing rows
-
-//     rentals.forEach(rental => {
-//         const row = document.createElement('tr');
-//         row.innerHTML = `
-//             <td>${rental.nic}</td>
-//             <td>${rental.name}</td>
-//             <td>${rental.phone}</td>
-//             <td>${rental.email}</td>
-//             <td>${rental.rentDate}</td>
-//         `;
-//         rentalBody.appendChild(row);
-//     });
-
-//     // Show the rental section and hide other sections
-//     document.getElementById('dashboardcontainer').style.display = 'none';
-//     document.getElementById('customerdcontainer').style.display = 'none';
-//     document.getElementById('rentaldcontainer').style.display = 'block';
-//     document.getElementById('overduedcontainer').style.display = 'none';
-//     document.getElementById('returncontainer').style.display = 'none';
-//     document.getElementById('display').style.display = 'none';
-// }
-
 function returnDvd() {
   // Get form values
   const nic = document.getElementById("return-nic").value;
@@ -412,6 +372,8 @@ function overdueshow() {
   document.getElementById("display").style.display = "none";
 }
 
+
+
 // Function to load pending rental requests from localStorage
 function loadPendingRentals() {
   const keys = Object.keys(localStorage);
@@ -455,77 +417,46 @@ function displayRentalRequest(rentalRequest) {
   //rentalBody.appendChild(row);  // Append to the manager's dashboard UI
 }
 
-// Function to approve the rental request
-// function approveRental(dvdid) {
-//     const rentalRequest = JSON.parse(localStorage.getItem(`rentItem-${dvdid}`));
-//     rentalRequest.status = 'approved';
-//     localStorage.setItem(`rentItem-${dvdid}`, JSON.stringify(rentalRequest));
-//     alert(`Rental for "${rentalRequest.title}" has been approved!`);
-//     // Reload the page or remove the request from the UI
-// }
-
-// function approveRental(dvdid) {
-//     const rentalItemKey = `${dvdid}`;
-//     // console.log(rentalItemKey);
-//     const rentalRequest = JSON.parse(localStorage.getItem(rentalItemKey));
-
-//     if (!rentalRequest) {
-//         alert(`Rental request for DVD ID "${dvdid}" not found.`);
-//         return;
-//     }
-
-//     rentalRequest.status = 'approved';
-//     localStorage.setItem(rentalItemKey, JSON.stringify(rentalRequest));
-//     alert(`Rental for "${rentalRequest.title}" has been approved!`);
-
-//     // Reload the page or remove the request from the UI
-//     location.reload(); // Optional: reloads the page to reflect the changes
-// }
 
 function approveRental(Request) {
-  console.log(Request);
 
   const keys = Object.keys(localStorage);
 
   //  const pendingRentals = keys.filter(key => key.startsWith('rentItem'));
-  //  console.log(pendingRentals);
   let pendingRentals = JSON.parse(localStorage.getItem("rentItem"));
   let currentUserList = JSON.parse(localStorage.getItem("customers"));
 
-  let currentUser;
-
-  // Assuming only one user is logged in or handled
-  //  let lastElement = currentUserList[currentUserList.length - 1];
-  //  console.log(lastElement)
-
-  console.log("Current User:", currentUser);
   let movietitle;
-  pendingRentals.forEach((e) => {
-    users = e.user == currentUser;
-    if (e.status === "pending" && e.dvdid == Request) {
-      currentUserList.forEach((user) => {
-        if (e.user == user.username) {
-          e.status = "Approved";
-        console.log(user.username);
+  
+  currentUserList.forEach((user) => {
+    const currentUser = user.username;
 
-        }
-      });
+console.log(currentUser)
+    console.log("Current User:", currentUser);
+    pendingRentals.forEach((e) => {
+      users = e.user == currentUser;
+      if (e.status === "pending" && e.dvdid == Request &&  e.user==currentUser) {
 
-      // console.log(e.user);
-    }
-    movietitle = e.title;
-  }); //in the rental of the all array should assign in the rental request
-  localStorage.setItem("rentItem", JSON.stringify(pendingRentals));
+        e.status = "Approved"
+      }
+   
+      movietitle = e.title;
+    // console.log(e.user);
+  });
+  
+});
+//in the rental of the all array should assign in the rental request
+localStorage.setItem("rentItem", JSON.stringify(pendingRentals));
 
-  // console.log(movietitle)
+// console.log(movietitle)
 
-  const rentalItemKey = Request;
+const rentalItemKey = Request;
 
-  localStorage.setItem(rentalItemKey, JSON.stringify(Request));
-  alert(`Rental for "${movietitle}" has been approved!`);
+localStorage.setItem(rentalItemKey, JSON.stringify(Request));
+alert(`Rental for "${movietitle}" has been approved!`);
 
-  // Reload the page or remove the request from the UI
-  location.reload(); // Optional: reloads the page to reflect the changes
+// Reload the page or remove the request from the UI
+location.reload(); // Optional: reloads the page to reflect the changes
 }
 
 // Function to decline the rental request
