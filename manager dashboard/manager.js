@@ -16,6 +16,16 @@ function homepage() {
   document.getElementById("display").style.display = "none";
 }
 
+function reports(){
+  document.getElementById("dashboardcontainer").style.display = "none";
+  document.getElementById("customerdcontainer").style.display = "none";
+  document.getElementById("rentaldcontainer").style.display = "none";
+  document.getElementById("overduedcontainer").style.display = "none";
+  document.getElementById("returncontainer").style.display = "none";
+  document.getElementById("display").style.display = "none";
+  document.getElementById("report-container").style.display="block"
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   const addDvdForm = document.getElementById("add-Dvd-form");
   const DvdsTableBody = document
