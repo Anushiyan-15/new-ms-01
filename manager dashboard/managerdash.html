@@ -17,7 +17,7 @@
             <h1 class="logo_name">Cine</h1>
             <h1 class="logo_name">Cafe</h1>
         </div>
-        
+
 
         <div class="navbar">
             <ul>
@@ -27,13 +27,16 @@
                 <li><a href="#" onclick="customershow()"><i class="bi bi-people"></i><span>Customer</span></a>
                 </li>
                 <li><a href="#" id="displaydvd"><i class="bi bi-collection"></i><span>Invetory</span> </a></li>
-                <li><a href="#" onclick="loadPendingRentals()"><i class="bi bi-graph-up-arrow"></i><span>Rental</span></a></li>
+                <li><a href="#" onclick="loadPendingRentals()"><i
+                            class="bi bi-graph-up-arrow"></i><span>Rental</span></a></li>
 
-                <li><a href="#" onclick="overdueshow()"><i class="bi bi-exclamation-circle"></i><span>Overdue</span></a></li>
-                <li><a href="#" onclick="returnshow()"><i class="bi bi-arrow-return-left"></i><span>Return</span></a></li>
-       
-         <li><a href="#" onclick="Reports()"><i class="bi bi-table"></i><span>Reports</span></a></li>
-      </div>
+                <li><a href="#" onclick="overdueshow()"><i class="bi bi-exclamation-circle"></i><span>Overdue</span></a>
+                </li>
+                <li><a href="#" onclick="returnshow()"><i class="bi bi-arrow-return-left"></i><span>Return</span></a>
+                </li>
+
+                <li><a href="#" onclick="reports()"><i class="bi bi-table"></i><span>Reports</span></a></li>
+        </div>
     </div>
 
     <!-- <h1>Pending Rental Requests</h1>
@@ -76,8 +79,8 @@
         </table>
     </section>
 
-    
-    <section class="update-container" id="updatedcontainer" style="display: none;">
+
+    <!-- <section class="update-container" id="updatedcontainer" style="display: none;">
         <h2 style="margin-left:50px ;">Update Customers</h2>
         <table id="customer-table">
             <thead>
@@ -89,14 +92,14 @@
                 </tr>
             </thead>
             <tbody id="customer-body">
-                <!-- Customer details will be displayed here -->
-            </tbody>
+                Customer details will be displayed here -->
+    <!-- </tbody>
         </table>
-    </section>
+    </section> -->
 
     <!-- inventory reports -->
 
-    <section style="display: none;" id="display" class="displaycontainer" >
+    <section style="display: none;" id="display" class="displaycontainer">
 
         <h2 style="margin-left:50px ;">Inventory Dvds</h2>
         <table id="Dvds-table">
@@ -176,10 +179,16 @@
         </form>
     </section>
 
-    <script>
-        var toggle = document.getElementById("toggle");
-        var container = document.getElementById("container");
-    </script>
+    <!-- reports of the all rental return customer -->
+
+    <section class="report-container" id="reportcontainer" style="display: none;">
+        <button>Rental Report</button>
+        <button>Return Report</button>
+
+    </section>
+
+
+
 
 
 

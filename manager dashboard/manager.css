@@ -30,7 +30,7 @@
 
 
 
-.dashboard-container,.customer-container ,.rental-container, .overdue-container ,.return-container,.displaycontainer,.update-container{
+.dashboard-container,.customer-container ,.rental-container, .overdue-container ,.return-container,.displaycontainer,.report-container{
     margin: 20px;
     border-radius: 20px;
     width: 100rem;
@@ -65,7 +65,7 @@
     
 }
 
-.displaycontainer, .rental-container, .overdue-container, .return-container h2{
+.displaycontainer, .rental-container, .overdue-container, .return-container ,.report-container h2{
     color: #0b355f;
 }
 
@@ -87,7 +87,7 @@
 
 
 
-.dashboard-container button,.return-container button {
+.dashboard-container button,.return-container button ,.report-container button{
     width: auto;
     border-radius: 5px;
     border: none;
@@ -96,16 +96,16 @@
     border-radius: 5px;
     border: none;
 }
-.dashboard-container button,.return-container button {
+.dashboard-container button,.return-container button ,.report-container button{
     cursor: pointer;
 }
 .return-container button:hover {
     background-color: #446e97;
 }
-.dashboard-container table ,.customer-container table,.rental-container table,.overdue-container table,.displaycontainer table,.update-container {
+.dashboard-container table ,.customer-container table,.rental-container table,.overdue-container table,.displaycontainer table,.report-container {
     width: 100%;
     border-collapse: collapse;
-    /* background-color: #1d456d; */
+
 }
 
 
@@ -113,7 +113,7 @@
 .customer-container th ,
 .rental-container th,.rental-container td,
 .overdue-container th,.overdue-container td
-.displaycontainer th .displaycontainer td,.update-container th .update-container td{
+.displaycontainer th .displaycontainer td{
     border: 1px solid #ccc;
     padding: 10px;
     text-align: center;
@@ -121,7 +121,7 @@
 
 
 
-.dashboard-container th,.customer-container th ,.rental-container th ,.overdue-container th,.displaycontainer th,.update-container {
+.dashboard-container th,.customer-container th ,.rental-container th ,.overdue-container th,.displaycontainer th {
     background-color: #f4f4f4;
 }
 .dashboard-container img {
@@ -150,7 +150,7 @@ body {
     width: 100vw;
     height: 100vh;
     justify-content: start;
-    background-image: url(../img/1.jpg);
+    background-image: url(../img/office-supplies-table.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
