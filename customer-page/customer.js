@@ -45,7 +45,7 @@ function showdvd() {
   // location.reload();
 }
 
-window.onload = showdvd();
+window.location.onload = showdvd();
 
 // Example array of DVDs (can come from a server or database)
 // const dvds = [
@@ -156,6 +156,8 @@ function storeItemDetails(buttonElement) {
       return;
     }
 
+    // const cus = JSON.parse(localStorage.getItem('customers')) || [];
+
     const Dvds = JSON.parse(localStorage.getItem("Dvds")) || [];
     // console.log("Available DVDs:", Dvds); // Log the available DVDs for debugging
     var dvdId = card.id; // Assuming the card's id is the DVD id
@@ -169,17 +171,18 @@ function storeItemDetails(buttonElement) {
     var itemTitle = card.querySelector(".item-title") ? card.querySelector(".item-title").innerText : null;
     // var itemImage = card.querySelector(".item-image") ? card.querySelector(".item-image").src : null;
     // var itemDescription = card.querySelector(".item-description") ? card.querySelector(".item-description").innerText : null;
-    var itemQuantity = card.querySelector(".item-quantity") ? card.querySelector(".item-quantity").value : "0";
 
     // Store details in localStorage
     const itemDetails = {
+      rentalid:Number(Math.floor(Math.random() * 1000)),
       dvdid: dvd.id, // Use the found DVD's ID
       title: itemTitle,
       user: currentUser.username,
       NIC: currentUser.nic,
       rentdate:new Date(),
       status: "pending",
-      quantity: parseInt(itemQuantity) // Store quantity as an integer
+      quantity: 1 ,
+      cusid:currentUser.id
     };
 
     // Retrieve existing rental items or initialize an empty array
@@ -198,21 +201,7 @@ function storeItemDetails(buttonElement) {
 
 
 
-function mainquantity(itemQuantity) {
-  const Dvds = JSON.parse(localStorage.getItem("Dvds")) || [];
-  const rentItem = JSON.parse(localStorage.getItem("rentItem")) || [];
 
-  const dvdToUpdate = Dvds.find((dvd) => dvd.title === rentItem.title);
-  dvdToUpdate.quantity -= itemQuantity;
-  localStorage.setItem("Dvds", JSON.stringify(dvdToUpdate));
-
-  // if (dvdToUpdate) {
-
-  //     console.log(`Updated Dvds after renting:`, Dvds);
-  // } else {
-  //     console.log('Could not find DVD in the list.');
-  // }
-}
 
 // Function to show the modal and populate the content from localStorage
 function showRentPopup() {
