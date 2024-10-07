@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <img src="${Dvd.image}" alt="${Dvd.title}">
             <div class="card-content">
                 <h2>Name: ${Dvd.title}</h2>
-                <p>Genre: ${Dvd.category} <br> Release date:${Dvd.Date} <br> Director:${Dvd.description}<br> Qunatity:${Dvd.quantity}</p>                  
+                <p>Genre: ${Dvd.category} <br> Release date:${Dvd.Date} <br> Director:${Dvd.Director}<br> Quantity:${Dvd.quantity}</p>                  
                 <a href="../login.html"><button class="request-btn">Request</button> </a>
             </div>
         </div>

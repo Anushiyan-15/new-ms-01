@@ -6,9 +6,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Load data from localStorage
     let users = JSON.parse(localStorage.getItem('customers')) || [];
-    let Dvds = JSON.parse(localStorage.getItem('Dvds')) || [];
-    let rentals = JSON.parse(localStorage.getItem('rentals')) || [];
-
     // Check if user is logged in
     const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
     if (currentUser) {
@@ -41,6 +38,8 @@ document.addEventListener('DOMContentLoaded', function () {
             e.preventDefault();
             const username = document.getElementById('registerUsername').value;
             const password = document.getElementById('registerPassword').value;
+             const id = Number(Math.floor(Math.random() * 1000));
+
             const nic = document.getElementById('registerNIC').value;
             const email = document.getElementById('registeremail').value;
             const number = document.getElementById('registernumber').value;
@@ -53,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
 
-            const newUser = { username, password, nic, email, number };
+            const newUser = { username, password, nic, email, number,id };
             users.push(newUser);
             localStorage.setItem('customers', JSON.stringify(users));
             alert('Registration successful. Please login.');
@@ -77,20 +76,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Customer functionality
     if (window.location.pathname.includes('../customer-page/customer.html')) {
-        const availableMotorDvdBody = document.getElementById('rent-container');
-        const myRentalsTableBody = document.getElementById('myRentalsTableBody');
 
-
-
-       
     }
-
-    
-
-
-
-
-
 });
 
 
