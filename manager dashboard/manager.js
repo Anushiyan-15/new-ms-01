@@ -438,7 +438,7 @@ function approveRental(Request) {
   currentUserList.forEach((user) => {
     customerId = user.id;
   });
-  console.log(customerId)
+
 
   pendingRentals.forEach((e) => {
     // Check if the current rental matches the request and is pending
@@ -481,25 +481,29 @@ function declineRental(dvdid) {
 
   let customerId;
   currentUserList.forEach((user) => {
-    customerId = user.id
+    customerId = user.id;
   });
-  console.log(`customerid:${customerId}`)
 
   pendingRentals.forEach((e) => {
-
-    if (e.status === "pending" && e.dvdid == dvdid && e.cusid == customerId) {
-      e.status = "Decline";
-
-
+    // console.log(e);
+    // console.log(e.status);
+    console.log(e.dvdid , dvdid)
+    console.log(e.cusid , customerId);
+    console.log(e.dvdid == dvdid);
+    console.log(e.cusid == customerId)
+    if (e.status === "pending" && e.status != "Decline" && e.dvdid == dvdid && e.cusid == customerId) {
+          e.status = "Decline";
     }
 
-    console.log(e.dvdid)
-    console.log(e.cusid)
+    
 
 
   });
+  console.log(`customerid:${customerId}`)
+  console.log(pendingRentals)
 
-  alert("Rental request declined.");
+
+  // alert("Rental request declined.");
   localStorage.setItem("rentItem", JSON.stringify(pendingRentals));
 
 
@@ -508,7 +512,7 @@ function declineRental(dvdid) {
 
 
   // Optionally reload the page or update the UI accordingly
-  location.reload(); // Uncomment this if you want to reload the page
+  //location.reload(); // Uncomment this if you want to reload the page
 }
 
 
