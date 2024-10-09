@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
     Dvd.forEach((Dvd, index) => {
       const row = document.createElement("tr");
       row.innerHTML = `
-                <td><img src="${Dvd.image}" alt="Bike Image" style="width: 100px; height: auto;"></td>
+                <td><img src="${Dvd.image}" alt="Dvd Image" style="width: 100px; height: auto;"></td>
                 <td>${Dvd.title}</td>
                 <td>${Dvd.Director}</td>
                 <td>${Dvd.Date}</td>

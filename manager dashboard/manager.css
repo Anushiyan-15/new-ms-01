@@ -328,10 +328,14 @@ body {
 #Dvds-table,#customer-table,#rental-table, #overdue-table{
     color: #f3efef;
     background-color: #1d456d;
+    text-align: center;
+
 }
 
 #Dvds-table th,#customer-table,#rental-table, #overdue-table th{
     color: #0b355f;
+    border:  white 1px;
+
 
 }
 
@@ -339,5 +343,3 @@ body {
     color: #fff;
 
 }
-
-
