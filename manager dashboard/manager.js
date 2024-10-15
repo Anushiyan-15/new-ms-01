@@ -5,6 +5,7 @@ function dashboardshow() {
   document.getElementById("overduedcontainer").style.display = "none";
   document.getElementById("returncontainer").style.display = "none";
   document.getElementById("display").style.display = "none";
+  document.getElementById("reportcontainer").style.display = "none";
 }
 
 function homepage() {
@@ -14,6 +15,7 @@ function homepage() {
   document.getElementById("overduedcontainer").style.display = "none";
   document.getElementById("returncontainer").style.display = "none";
   document.getElementById("display").style.display = "none";
+  document.getElementById("reportcontainer").style.display = "none";
 }
 
 function reports() {
@@ -23,7 +25,7 @@ function reports() {
   document.getElementById("overduedcontainer").style.display = "none";
   document.getElementById("returncontainer").style.display = "none";
   document.getElementById("display").style.display = "none";
-  document.getElementById("report-container").style.display = "block"
+  document.getElementById("reportcontainer").style.display = "block";
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -45,6 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("overduedcontainer").style.display = "none";
     document.getElementById("returncontainer").style.display = "none";
     document.getElementById("display").style.display = "block";
+    document.getElementById("reportcontainer").style.display = "none";
 
     const Dvd = JSON.parse(localStorage.getItem("Dvds")) || [];
     DvdsTableBody.innerHTML = ""; // Clear existing rows
@@ -149,6 +152,7 @@ function customershow() {
   document.getElementById("overduedcontainer").style.display = "none";
   document.getElementById("returncontainer").style.display = "none";
   document.getElementById("display").style.display = "none";
+  document.getElementById("reportcontainer").style.display = "none";
 }
 function displayCustomers() {
   let customers = JSON.parse(localStorage.getItem("customers")) || [];
@@ -177,16 +181,6 @@ function displayCustomers() {
 displayCustomers();
 // Load customers on page load
 window.onload = displayCustomers;
-
-function customerupdate() {
-  document.getElementById("customerdcontainer").style.display = "block";
-  document.getElementById("dashboardcontainer").style.display = "none";
-  document.getElementById("rentaldcontainer").style.display = "none";
-  document.getElementById("overduedcontainer").style.display = "none";
-  document.getElementById("returncontainer").style.display = "none";
-  document.getElementById("display").style.display = "none";
-  document.getElementById("updatedcontainer").style.display = "block";
-}
 
 // rental show function
 function rentalshow() {
@@ -263,8 +257,6 @@ function rentalshow() {
 // }
 // window.onload = checkOverdueRentals;
 
-// return function
-
 function returnshow() {
   document.getElementById("customerdcontainer").style.display = "none";
   document.getElementById("dashboardcontainer").style.display = "none";
@@ -272,75 +264,7 @@ function returnshow() {
   document.getElementById("overduedcontainer").style.display = "none";
   document.getElementById("returncontainer").style.display = "block";
   document.getElementById("display").style.display = "none";
-
-  function returnMotorbike() {
-    const nic = document.getElementById("return-nic").value;
-    const dvdtitle = document.getElementById("return-title").value;
-    const customer = customers.find((c) => c.nic === nic);
-    const DVD = motorbikes.find(
-      (m) => m.registrationNumber === registrationNumber
-    );
-
-    if (!customer) {
-      alert("Customer not found");
-      return;
-    }
-
-    const rentalIndex = customer.rentalHistory.findIndex(
-      (r) => r.nic === nic && !r.returnProcessed
-    );
-    if (rentalIndex === -1) {
-      alert("Rental record not found");
-      return;
-    }
-
-    customer.rentalHistory[rentalIndex].returnProcessed = true;
-    DVD.quantity += 1;
-    saveToLocalStorage();
-
-    alert("DVD returned successfully!");
-    document.getElementById("return-DVD-form").reset();
-  }
-}
-
-function returnDvd() {
-  // Get form values
-  const nic = document.getElementById("return-nic").value;
-  const title = document.getElementById("return-title").value;
-
-  // Retrieve data from local storage
-  let rentals = JSON.parse(localStorage.getItem("Rentals")) || [];
-  let dvds = JSON.parse(localStorage.getItem("Dvds")) || [];
-
-  // Find rental record for the given NIC and DVD title
-  const rentalIndex = rentals.findIndex(
-    (rental) => rental.nic === nic && rental.title === title
-  );
-  if (rentalIndex === -1) {
-    alert("No matching rental found for this NIC and DVD title.");
-    return;
-  }
-
-  // Remove the rental record
-  rentals.splice(rentalIndex, 1);
-  localStorage.setItem("Rentals", JSON.stringify(rentals));
-
-  // Update DVD inventory (optional: you can add quantity tracking here)
-  // Example: Increase DVD stock
-  const dvdIndex = dvds.findIndex((dvd) => dvd.title === title);
-  if (dvdIndex === -1) {
-    alert("DVD not found in inventory.");
-    return;
-  }
-
-  dvds[dvdIndex].quantity = (dvds[dvdIndex].quantity || 0) + 1;
-  localStorage.setItem("Dvds", JSON.stringify(dvds));
-
-  // Clear the form fields
-  document.getElementById("return-nic").value = "";
-  document.getElementById("return-title").value = "";
-
-  alert("DVD returned successfully.");
+  document.getElementById("reportcontainer").style.display = "none";
 }
 
 function overdueshow() {
@@ -380,32 +304,39 @@ function overdueshow() {
   document.getElementById("overduedcontainer").style.display = "block";
   document.getElementById("returncontainer").style.display = "none";
   document.getElementById("display").style.display = "none";
+  document.getElementById("reportcontainer").style.display = "none";
 }
-
-
 
 // Function to load pending rental requests from localStorage
 function loadPendingRentals() {
   const keys = Object.keys(localStorage);
   const pendingRentals = keys.filter((key) => key.startsWith("rentItem"));
-  pendingRentals.forEach((key) => {
-    const rentalRequest = JSON.parse(localStorage.getItem(key));
+  let foundPendingRental = false;
+  pendingRentals.forEach((keys) => {
+    const rentalRequest = JSON.parse(localStorage.getItem(keys));
     // console.log(rentalRequest)
 
     rentalRequest.forEach((e) => {
       if (e.status === "pending") {
         displayRentalRequest(e);
-        // console.log("Displaying Rental Request:", e);
+        console.log("Displaying Rental Request:", e);
+        foundPendingRental = true;
       }
     }); //in the rental of the all array should assign in the rental request
   });
-
+  // Check if no rental requests were found and display a message
+  const rentalBody = document.getElementById("rental-body");
+  if (!foundPendingRental) {
+    rentalBody.innerHTML =
+      '<tr><td colspan="6">No rental requests found.</td></tr>'; // Update table body to show the message
+  }
   // Show the rental section and hide other sections
   document.getElementById("dashboardcontainer").style.display = "none";
   document.getElementById("customerdcontainer").style.display = "none";
   document.getElementById("rentaldcontainer").style.display = "block";
   document.getElementById("overduedcontainer").style.display = "none";
   document.getElementById("returncontainer").style.display = "none";
+  document.getElementById("reportcontainer").style.display = "none";
   document.getElementById("display").style.display = "none";
 }
 // Function to display each pending rental request in the manager's dashboard
@@ -423,99 +354,90 @@ function displayRentalRequest(rentalRequest) {
         <td> <button onclick="approveRental('${rentalRequest.dvdid}')">Approve</button>
         <button onclick="declineRental('${rentalRequest.dvdid}')">Decline</button></td>
         </tr>
+
     `;
-  //rentalBody.appendChild(row);  // Append to the manager's dashboard UI
 }
 
-
-function approveRental(Request) {
+function approveRental(dvdid) {
+  // Retrieve all pending rentals and the customer list from localStorage
   let pendingRentals = JSON.parse(localStorage.getItem("rentItem")) || [];
   let currentUserList = JSON.parse(localStorage.getItem("customers")) || [];
 
-
   let movietitle;
-  let customerId
-  currentUserList.forEach((user) => {
-    customerId = user.id;
+  let approvedRental = null;
+
+  // Loop through all rentals and match the dvdid and customer ID
+  pendingRentals.forEach((rental) => {
+    currentUserList.forEach((user) => {
+      // Check if the rental is pending, and the dvdid and customer ID match
+      if (
+        rental.status === "pending" &&
+        rental.dvdid == dvdid &&
+        rental.cusid == user.id &&
+        rental.NIC === user.nic
+      ) {
+        rental.status = "Approved";
+
+        // Calculate the return date (7 days from the approval date)
+        const currentDate = new Date();
+        const returnDate = new Date(currentDate);
+        returnDate.setDate(currentDate.getDate() + 7);
+        rental.returnDate = returnDate.toISOString(); // Save return date in ISO format
+
+        movietitle = rental.title; // Save the movie title for the alert
+        approvedRental = rental; // Save the approved rental for later use
+
+        // Optionally update DVD quantity logic here if needed
+        mainquantity(rental.dvdid, 1);
+      }
+    });
   });
 
-
-  pendingRentals.forEach((e) => {
-    // Check if the current rental matches the request and is pending
-    if (e.status === "pending" && e.dvdid == Request && e.cusid == customerId) {
-      // Approve the specific rental
-      e.status = "Approved";
-
-      // Calculate the return date
-      const currentDate = new Date();
-      const returnDate = new Date(currentDate);
-      returnDate.setDate(currentDate.getDate() + 7); // Add 7 days
-      e.returnDate = returnDate.toISOString(); // Save return date in ISO format
-
-      // Update the DVD quantity
-      mainquantity(e.dvdid, 1);
-
-      movietitle = e.title; // Store the title for the alert
-      console.log(movietitle)
-    }
-
-  });
-
-  // Save the updated rentals back to local storage
-  localStorage.setItem("rentItem", JSON.stringify(pendingRentals));
-
-  if (movietitle) {
+  // If an approved rental was found, save the updated rentals back to local storage
+  if (approvedRental) {
+    localStorage.setItem("rentItem", JSON.stringify(pendingRentals));
+    alert(`Rental for "${movietitle}" has been approved!`);
+  } else {
     alert("Rental request not found or already processed.");
   }
 
-  // Optionally reload the page or update the UI
-  location.reload(); // Uncomment if you want to reload the page
+  // Optionally reload the page or update the UI accordingly
+  location.reload(); // Uncomment this if you want to reload the page
 }
 
-
 function declineRental(dvdid) {
-  
-  // Retrieve the current rentals from local storage
+  // Retrieve the current rentals and customer list from localStorage
   let pendingRentals = JSON.parse(localStorage.getItem("rentItem")) || [];
   let currentUserList = JSON.parse(localStorage.getItem("customers")) || [];
 
-  let customerId;
-  currentUserList.forEach((user) => {
-    customerId = user.id;
+  let declinedRental = null;
+
+  // Loop through all rentals and match the dvdid and customer ID
+  pendingRentals.forEach((rental) => {
+    currentUserList.forEach((user) => {
+      // Check if the rental is pending, and the dvdid and customer ID match
+      if (
+        rental.status === "pending" &&
+        rental.dvdid == dvdid &&
+        rental.cusid == user.id
+      ) {
+        rental.status = "Declined";
+        declinedRental = rental; // Save the declined rental for later use
+      }
+    });
   });
 
-  pendingRentals.forEach((e) => {
-    // console.log(e);
-    // console.log(e.status);
-    console.log(e.dvdid , dvdid)
-    console.log(e.cusid , customerId);
-    console.log(e.dvdid == dvdid);
-    console.log(e.cusid == customerId)
-    if (e.status === "pending" && e.status != "Decline" && e.dvdid == dvdid && e.cusid == customerId) {
-          e.status = "Decline";
-    }
-
-    
-
-
-  });
-  console.log(`customerid:${customerId}`)
-  console.log(pendingRentals)
-
-
-  // alert("Rental request declined.");
-  localStorage.setItem("rentItem", JSON.stringify(pendingRentals));
-
-
-
-
-
+  // If a declined rental was found, save the updated rentals back to local storage
+  if (declinedRental) {
+    localStorage.setItem("rentItem", JSON.stringify(pendingRentals));
+    alert("Rental request has been declined.");
+  } else {
+    alert("Rental request not found or already processed.");
+  }
 
   // Optionally reload the page or update the UI accordingly
-  //location.reload(); // Uncomment this if you want to reload the page
+  location.reload(); // Uncomment this if you want to reload the page
 }
-
-
 
 function mainquantity(dvdid, quantity) {
   const Dvds = JSON.parse(localStorage.getItem("Dvds")) || [];
@@ -528,7 +450,7 @@ function mainquantity(dvdid, quantity) {
 
     // Ensure quantity doesn't go below zero
     if (dvdToUpdate.quantity < 0) {
-      alert('Quantity cannot be negative');
+      alert("Quantity cannot be negative");
       dvdToUpdate.quantity = 0; // Set to zero or handle it as you see fit
     }
 
@@ -537,7 +459,67 @@ function mainquantity(dvdid, quantity) {
 
     console.log(`Updated Dvds after renting:`, Dvds);
   } else {
-    console.log('Could not find DVD in the list.');
+    console.log("Could not find DVD in the list.");
   }
 }
 
+function returndvd() {
+  // Get form values
+  const nic = document.getElementById("return-nic").value;
+  const dvdid = document.getElementById("return-title").value;
+
+  let rentals = JSON.parse(localStorage.getItem("rentItem")) || [];
+  let dvds = JSON.parse(localStorage.getItem("Dvds")) || [];
+
+  let rentalFound = false; // Flag to track if rental was found
+
+  rentals.forEach((rental) => {
+    if (
+      rental.dvdid == dvdid &&
+      rental.NIC == nic &&
+      rental.status === "Approved"
+    ) {
+      rentalFound = true; // Set flag to true since we found a matching rental
+      const currentDate = new Date();
+      const returnDate = new Date(rental.returnDate);
+
+      if (currentDate > returnDate) {
+        const daysLate = Math.ceil(
+          (currentDate - returnDate) / (1000 * 60 * 60 * 24)
+        );
+        alert(`You are ${daysLate} days late! Late fees may apply.`);
+      }
+
+      // Update rental status
+      rental.status = "Returned";
+      rental.actualReturnDate = currentDate.toISOString();
+
+      // Update DVD quantity
+      dvds.forEach((dvd) => {
+        console.log(
+          `Checking DVD: ${dvd.title} (ID: ${dvd.id}, Quantity: ${dvd.quantity})`
+        ); // Log each DVD
+
+        if (dvd.id === dvdid) {
+          dvd.quantity++; // Increment quantity on return
+          console.log(
+            `DVD quantity for "${dvd.title}" updated to: ${dvd.quantity}`
+          );
+        }
+      });
+      // Clear the form fields
+      document.getElementById("return-nic").value = "";
+      document.getElementById("return-title").value = "";
+
+      alert(`DVD "${rental.title}" returned successfully!`);
+    }
+  });
+
+  if (!rentalFound) {
+    alert("Rental request not found or already returned.");
+  }
+
+  // Save updated data
+  localStorage.setItem("rentItem", JSON.stringify(rentals));
+  localStorage.setItem("Dvds", JSON.stringify(dvds));
+}

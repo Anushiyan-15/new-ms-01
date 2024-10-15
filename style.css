@@ -121,7 +121,10 @@
      height: 30%;
      margin: 30px 0px;
  }
-
+.cancel-rent-btn{
+    background-color: red;
+    color: whitesmoke;
+}
  .slide.active {
      display: block;
  }
