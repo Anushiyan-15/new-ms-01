@@ -26,7 +26,8 @@ function showdvd() {
                 <p class="item-description">Genre: ${Dvd.category} <br> Release date: ${Dvd.Date} <br> Director: ${Dvd.Director}</p>
                 <label>Quantity:</label><br>
                 <input type="number" class="item-quantity" value="${Dvd.quantity}" min="1" readonly>
-                <button class="rent-button" onclick="storeItemDetails(this)">Rent</button>
+                <button class="rent-button" onclick="toggleRentButton(this)">Rent</button>
+            
             </div>
         </div>
     `;
@@ -46,6 +47,17 @@ function showdvd() {
 
 window.location.onload = showdvd();
 
+// Function to toggle between "Rent" and "Confirm Rent"
+function toggleRentButton(buttonElement) {
+  // Check if the button is in "Rent" or "Confirm Rent" state
+  if (buttonElement.innerText === "Rent") {
+    buttonElement.innerText = "Confirm Rent"; // Change to "Confirm Rent"
+  } else if (buttonElement.innerText === "Confirm Rent") {
+    storeItemDetails(buttonElement); // Store item details in localStorage
+    buttonElement.innerText = "Rent"; // Revert back to "Rent"
+  }
+}
+
 function storeItemDetails(buttonElement) {
   try {
     // Find the closest card to the button that was clicked
@@ -56,21 +68,14 @@ function storeItemDetails(buttonElement) {
       return;
     }
 
-    // Change button text to "Confirm Rent"
-    if (buttonElement.textContent === "Rent") {
-      buttonElement.textContent = "Confirm Rent";
-    } else {
-      // Optionally handle the case where it's already "Confirm Rent"
-      // You can add further logic here, such as completing the rent process
-      alert("Rental confirmed!");
-    }
-
+    // Retrieve the current user from sessionStorage
     const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
     if (!currentUser) {
-      // console.error("No current user found in session storage!");
+      alert("Please log in to rent a DVD.");
       return;
     }
 
+    // Retrieve available DVDs from localStorage
     const Dvds = JSON.parse(localStorage.getItem("Dvds")) || [];
     var dvdId = card.id; // Assuming the card's id is the DVD id
     var dvd = Dvds.find((dvd) => dvd.id == dvdId);
@@ -84,71 +89,56 @@ function storeItemDetails(buttonElement) {
       ? card.querySelector(".item-title").innerText
       : null;
 
-    // Assuming dvd.quantity holds the available quantity
-    var quantity = dvd.quantity; // Adjust this based on your DVD object structure
+    // Check DVD availability (assuming `dvd.quantity` holds the stock quantity)
+    var quantity = dvd.quantity;
 
-    // Check if quantity is 0
+    // If the DVD is out of stock
     if (quantity === 0) {
-      alert("Customer, DVD quantity is out of stock!");
+      alert("Sorry, this DVD is out of stock.");
       return; // Exit the function if out of stock
     }
 
-    // Store details in localStorage
-    const itemDetails = {
-      rentalid: Number(Math.floor(Math.random() * 1000)),
-      dvdid: dvd.id, // Use the found DVD's ID
-      title: itemTitle,
-      user: currentUser.username,
-      NIC: currentUser.nic,
-      rentdate: new Date(),
-      status: "pending",
-      quantity: 1,
-      cusid: currentUser.id,
-    };
+    // Toggle between "Rent" and "Confirm Rent"
+    if (buttonElement.textContent === "Rent") {
+      buttonElement.textContent = "Confirm Rent"; // Change button text to "Confirm Rent"
+      
+    } else if (buttonElement.textContent === "Confirm Rent") {
+      // Proceed with the rental process if the button is in "Confirm Rent" state
+      const itemDetails = {
+        rentalid: Number(Math.floor(Math.random() * 1000)),
+        dvdid: dvd.id, // Use the found DVD's ID
+        title: itemTitle,
+        user: currentUser.username,
+        NIC: currentUser.nic,
+        rentdate: new Date(),
+        status: "pending",
+        quantity: 1, // Assuming each rental is for 1 DVD
+        cusid: currentUser.id,
+      };
 
-    // Retrieve existing rental items or initialize an empty array
-    const customerRental = JSON.parse(localStorage.getItem("rentItem")) || [];
-    customerRental.push(itemDetails);
+      // Retrieve existing rental items or initialize an empty array
+      const customerRental = JSON.parse(localStorage.getItem("rentItem")) || [];
+      customerRental.push(itemDetails);
 
-    // Store updated rental items back to localStorage
-    localStorage.setItem("rentItem", JSON.stringify(customerRental));
+      // Store updated rental items back to localStorage
+      localStorage.setItem("rentItem", JSON.stringify(customerRental));
 
-    // Now show the popup with the stored details
+      // Alert the customer that the rental is confirmed
+      alert(`Rental for "${itemTitle}" has been confirmed!`);
+
+      // Reset the button back to "Rent"
+      buttonElement.textContent = "Rent";
+
+      // If there's a cancel button, remove it after confirmation
+      const cancelButton = buttonElement.parentElement.querySelector(".cancel-rent-btn");
+      if (cancelButton) cancelButton.remove();
+    }
+
   } catch (err) {
     console.error("An error occurred: " + err);
   }
 }
 
-// function showRentPopup(itemDetails) {
-//   let rentItem = JSON.parse(localStorage.getItem("rentItem")) || [];
-//   let dvds = JSON.parse(localStorage.getItem("Dvds")) || [];
-
-//   rentItem.forEach((e) => {
-//     console.log(itemDetails.rentalid);
-//     console.log(e.rentalid);
-//     console.log(itemDetails.rentalid == e.rentalid);
-//     // dvds.forEach(element => {
-
-//     // });
-//     if (itemDetails.rentalid == e.rentalid) {
-//       // Populate the modal with the retrieved data
-//       document.getElementById("popup-title").innerText = e.title;
-//       // You might want to ensure the image property exists in your itemDetails
-//       document.getElementById("popup-image").src = e.image || "";
-//       document.getElementById("popup-description").innerText =
-//         e.image || "No description available";
-//       // document.getElementById('quantity').value = e.quantity;
-
-//       // Display the modal
-//       document.getElementById("rentpopup").style.display = "block";
-//     } else {
-//       alert("No item details provided for the popup");
-//     }
-//   });
-// }
-
-
-// Function to save the final details (e.g., when the user confirms rent)
 
 document.getElementById("saveDetails").addEventListener("click", saveDetails);
 function saveDetails() {
