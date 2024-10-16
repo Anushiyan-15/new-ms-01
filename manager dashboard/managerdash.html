@@ -160,13 +160,58 @@
     </section>
 
     <!-- reports of the all rental return customer -->
-
-    <section class="report-container" id="reportcontainer" style="display: none;">
-        <button>Rental Report</button>
-        <button>Return Report</button>
-
+    <section class="report-container" id="reportcontainer" style="display: none;"  onclick="loadReportCounts()">
+        <div>
+            <div id="pendingCount"></div>
+            <div id="approvedCount"></div>
+            <div id="declinedCount"></div>
+            <div id="returnCount"></div>
+            <div id="totalRentalCount"></div> <!-- Total rental count element -->
+        </div>
+        
+        <button id="rentalReportBtn">Rental Report</button>
+        <button id="returnReportBtn">Return Report</button>
+    
+        <!-- Containers for displaying reports -->
+        <div id="rentalReport" style="display: none;">
+            <h2>Rental Report</h2>
+            <table id="rental-table1">
+                <thead>
+                    <tr>
+                        <th>Rental ID</th>
+                        <th>Customer</th>
+                        <th>DVD Title</th>
+                        <th>Rental Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="rentalReportBody">
+                    <!-- Rental rows will be inserted here -->
+                </tbody>
+            </table>
+        </div>
+    
+        <div id="returnReport" style="display: none;">
+            <h2>Return Report</h2>
+            <table id="return-table">
+                <thead>
+                    <tr>
+                        <th>Rental ID</th>
+                        <th>Customer(NIC)</th>
+                        <th>DVD Title</th>
+                        <th>Rental Date</th>
+                        <th>Return Date</th>
+                        <th>Actual Return Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="returnReportBody">
+                    <!-- Return rows will be inserted here -->
+                </tbody>
+            </table>
+        </div>
     </section>
-
+    
 
 
 
