@@ -32,36 +32,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Register form submission
-    // if (registerForm) {
-    //     registerForm.addEventListener('submit', function (e) {
-    //         e.preventDefault();
-    //         const username = document.getElementById('registerUsername').value;
-    //         const password = document.getElementById('registerPassword').value;
-    //          const id = Number(Math.floor(Math.random() * 1000));
-
-    //         const nic = document.getElementById('registerNIC').value;
-    //         const email = document.getElementById('registeremail').value;
-    //         const number = document.getElementById('registernumber').value;
-
-
-
-    //         if (users.some(u => u.username === username && u.nic === nic && u.password===password)) {
-    //             alert('Username or nic already exists');
-    //             return;
-    //         }
-
-
-    //         const newUser = { username, password, nic, email, number,id };
-    //         users.push(newUser);
-    //         localStorage.setItem('customers', JSON.stringify(users));
-    //         alert('Registration successful. Please login.');
-    //         //registerForm.reset();
-    //     });
-
-    //     registerForm.reset();
-    // }
-
 
 
     if (registerForm) {
@@ -99,7 +69,12 @@ document.addEventListener('DOMContentLoaded', function () {
     
             // Show success message and reset the form
             alert('Registration successful. Please login.');
-            registerForm.reset(); // Reset the form after successful registration
+             // Reset the form after successful registration
+             document.getElementById('registerUsername').value = "";
+             document.getElementById('registerPassword').value = "";
+             document.getElementById('registerNIC').value = "";
+             document.getElementById('registeremail').value = "";
+             document.getElementById('registernumber').value = "";
         });
     }
     
