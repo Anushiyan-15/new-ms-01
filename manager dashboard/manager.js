@@ -26,6 +26,10 @@ function reports() {
   document.getElementById("returncontainer").style.display = "none";
   document.getElementById("display").style.display = "none";
   document.getElementById("reportcontainer").style.display = "block";
+
+
+    // Call the function to load the report counts
+    loadReportCounts();
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -273,16 +277,16 @@ function overdueshow() {
   const overdueList = document.getElementById("overdue-list");
   overdueList.innerHTML = ""; // Clear existing rows
 
-  const now = new Date();
-  const hourlyRate = 60; // Charge per hour
-
   rentals.forEach((rental) => {
+    const currentDate = new Date();
     const returnDate = new Date(rental.returnDate);
-    if (returnDate < now) {
-      const rentalDate = new Date(rental.rentDate);
-      const diffTime = Math.max(0, now - returnDate); // Ensure non-negative
-      const diffHours = Math.ceil(diffTime / (1000 * 60 * 60)); // Convert milliseconds to hours
-      const charge = diffHours * hourlyRate;
+
+    if (currentDate > returnDate) {
+      const daysLate = Math.ceil(
+        (currentDate - returnDate) / (1000 * 60 * 60 * 24)
+      );
+      alert(`You are ${daysLate} days late! Late fees may apply.`);
+    }
 
       // Add to overdue list
       const row = document.createElement("tr");
@@ -294,10 +298,8 @@ function overdueshow() {
                 <td>${charge} Rs</td>
             `;
       overdueList.appendChild(row);
-    }
-  });
-
-  // Show the overdue section and hide other sections
+    });
+      // Show the overdue section and hide other sections
   document.getElementById("dashboardcontainer").style.display = "none";
   document.getElementById("customerdcontainer").style.display = "none";
   document.getElementById("rentaldcontainer").style.display = "none";
@@ -305,7 +307,10 @@ function overdueshow() {
   document.getElementById("returncontainer").style.display = "none";
   document.getElementById("display").style.display = "none";
   document.getElementById("reportcontainer").style.display = "none";
-}
+  };
+
+
+
 
 // Function to load pending rental requests from localStorage
 function loadPendingRentals() {
@@ -494,7 +499,7 @@ function returndvd() {
       // Update rental status
       rental.status = "Returned";
       rental.actualReturnDate = currentDate.toISOString();
-      returnQuantity(dvdid,1)
+      returnQuantity(rental.dvdid,1)
   
       // Clear the form fields
       document.getElementById("return-nic").value = "";
@@ -525,16 +530,117 @@ function returnQuantity(dvdid, quantity) {
 
   // Find the DVD to update
   const dvdToUpdate = Dvds.find((dvd) => dvd.id === dvdid);
-  console.log(dvdToUpdate)
+  console.log("assign dvd:",dvdToUpdate)
 
   if (dvdToUpdate) {
     dvdToUpdate.quantity += quantity; // Increase quantity for returns
 
     // Save the updated DVD list back to local storage
     localStorage.setItem("Dvds", JSON.stringify(Dvds));
-
+ 
     console.log(`Updated Dvds after returning:`, Dvds);
+
+    // Check if localStorage was updated correctly
+    const updatedDvds = JSON.parse(localStorage.getItem("Dvds"));
+    console.log("DVDs from localStorage after update:", updatedDvds);
   } else {
     console.log("Could not find DVD in the list.");
   }
+}
+
+
+// Function to generate the rental report
+function displayRentalReport() {
+  const rentals = JSON.parse(localStorage.getItem("rentItem")) || [];
+  const rentalReportBody = document.getElementById("rentalReportBody");
+  rentalReportBody.innerHTML = ""; // Clear previous entries
+
+  rentals.forEach((rental) => {
+    if (rental.status === "Approved" || rental.status === "pending" || rental.status === "Declined"  ) {
+      const rentalDate = new Date(rental.rentdate);
+
+      rentalReportBody.innerHTML += `
+        <tr>
+          <td>${rental.rentalid}</td>
+          <td>${rental.user} (${rental.NIC})</td>
+          <td>${rental.title}</td>
+          <td>${rentalDate.toLocaleDateString()}</td>
+          <td>${rental.status}</td>
+        </tr>
+      `;
+    }
+  });
+
+  // Hide return report and show rental report
+  document.getElementById("rentalReport").style.display = "block";
+  document.getElementById("returnReport").style.display = "none";
+}
+
+// Function to generate the return report
+function displayReturnReport() {
+  const rentals = JSON.parse(localStorage.getItem("rentItem")) || [];
+  const returnReportBody = document.getElementById("returnReportBody");
+  returnReportBody.innerHTML = ""; // Clear previous entries
+
+  rentals.forEach((rental) => {
+    if (rental.status === "Returned") {
+      const rentalDate = new Date(rental.rentdate);
+      const returnDate = new Date(rental.returnDate);
+      const actualReturnDate = new Date(rental.actualReturnDate);
+
+      returnReportBody.innerHTML += `
+        <tr>
+          <td>${rental.rentalid}</td>
+          <td>${rental.user} (${rental.NIC})</td>
+          <td>${rental.title}</td>
+          <td>${rentalDate.toLocaleDateString()}</td>
+          <td>${returnDate.toLocaleDateString()}</td>
+          <td>${actualReturnDate.toLocaleDateString()}</td>
+          <td>${rental.status}</td>
+        </tr>
+      `;
+    }
+  });
+
+  // Hide rental report and show return report
+  document.getElementById("returnReport").style.display = "block";
+  document.getElementById("rentalReport").style.display = "none";
+}
+
+// Event listeners for buttons
+document.getElementById("rentalReportBtn").addEventListener("click", displayRentalReport);
+document.getElementById("returnReportBtn").addEventListener("click", displayReturnReport);
+
+
+
+
+function loadReportCounts() {
+  const rentals = JSON.parse(localStorage.getItem("rentItem")) || [];
+
+  // Initialize counters for different rental statuses
+  let totalPending = 0;
+  let totalApproved = 0;
+  let totalDeclined = 0;
+  let totalReturned = 0;
+  let totalRentals = rentals.length; // Total rental count
+
+  // Loop through the rental items and count each status
+  rentals.forEach(rental => {
+      if (rental.status === "Pending") {
+          totalPending++;
+      } else if (rental.status === "Approved") {
+          totalApproved++;
+      } else if (rental.status === "Declined") {
+          totalDeclined++;
+      } else if (rental.status === "Returned") {
+          totalReturned++;
+      }
+  });
+
+  // Display the counts in the respective HTML elements
+  document.getElementById("pendingCount").innerHTML = `Total Pending Rentals: ${totalPending}`;
+  document.getElementById("approvedCount").innerHTML = `Total Approved Rentals: ${totalApproved}`;
+  document.getElementById("declinedCount").innerHTML = `Total Declined Rentals: ${totalDeclined}`;
+  document.getElementById("returnCount").innerHTML = `Total Returns: ${totalReturned}`;
+  document.getElementById("totalRentalCount").innerHTML = `Total Rentals: ${totalRentals}`; // Display total rental count
 }

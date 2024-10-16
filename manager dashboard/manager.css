@@ -69,7 +69,7 @@
     color: #0b355f;
 }
 
-#overduelist{
+#overduelist,.report-container{
   
     text-align: center;
 }
@@ -87,7 +87,7 @@
 
 
 
-.dashboard-container button,.return-container button ,.report-container button{
+.dashboard-container button,.return-container button{
     width: auto;
     border-radius: 5px;
     border: none;
@@ -100,7 +100,7 @@
     cursor: pointer;
 }
 .return-container button:hover {
-    background-color: #446e97;
+    background-color: #2216ac;
 }
 .dashboard-container table ,.customer-container table,.rental-container table,.overdue-container table,.displaycontainer table,.report-container {
     width: 100%;
@@ -326,13 +326,13 @@ body {
 
 
 #Dvds-table,#customer-table,#rental-table, #overdue-table{
-    color: #f3efef;
+    color: #f6eeee;
     background-color: #1d456d;
     text-align: center;
 
 }
 
-#Dvds-table th,#customer-table,#rental-table, #overdue-table th{
+#Dvds-table th,#customer-table, #overdue-table th{
     color: #0b355f;
     border:  white 1px;
 
@@ -343,3 +343,52 @@ body {
     color: #fff;
 
 }
+  .report-container button:hover {
+    background-color: green;
+  }
+  .report-container button{
+    background-color: rgb(59, 68, 240);
+    width: 103px;
+    border-radius: 5px;
+    border: none;
+  }
+
+  /* Table styles */
+  #rental-table1 ,#return-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px auto; /* Add spacing between the tables */
+    max-width: 90%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a light shadow for styling */
+  }
+
+  th, td {
+    padding: 12px;
+    text-align: center; /* Center align table data */
+    border: 1px solid #ddd;
+  }
+
+  /* Table header styling */
+  th {
+    background-color: #5d6ffc;
+    font-weight: bold;
+  }
+
+
+  /* Add some space between the two tables */
+  #returnReport, #rentalReport {
+    margin-top: 30px;
+  }
+
+  /* Responsive table adjustments */
+  @media (max-width: 768px) {
+    table {
+      width: 100%; /* Ensure tables are responsive */
+      font-size: 14px;
+    }
+  }
+
+  #rental-table1 td,#return-table td{
+    background-color: white;
+    color: #000;
+  }
