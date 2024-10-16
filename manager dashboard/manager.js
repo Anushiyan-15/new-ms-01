@@ -467,6 +467,7 @@ function returndvd() {
   // Get form values
   const nic = document.getElementById("return-nic").value;
   const dvdid = document.getElementById("return-title").value;
+  console.log(dvdid)
 
   let rentals = JSON.parse(localStorage.getItem("rentItem")) || [];
   let dvds = JSON.parse(localStorage.getItem("Dvds")) || [];
@@ -493,20 +494,8 @@ function returndvd() {
       // Update rental status
       rental.status = "Returned";
       rental.actualReturnDate = currentDate.toISOString();
-
-      // Update DVD quantity
-      dvds.forEach((dvd) => {
-        console.log(
-          `Checking DVD: ${dvd.title} (ID: ${dvd.id}, Quantity: ${dvd.quantity})`
-        ); // Log each DVD
-
-        if (dvd.id === dvdid) {
-          dvd.quantity++; // Increment quantity on return
-          console.log(
-            `DVD quantity for "${dvd.title}" updated to: ${dvd.quantity}`
-          );
-        }
-      });
+      returnQuantity(dvdid,1)
+  
       // Clear the form fields
       document.getElementById("return-nic").value = "";
       document.getElementById("return-title").value = "";
@@ -517,9 +506,35 @@ function returndvd() {
 
   if (!rentalFound) {
     alert("Rental request not found or already returned.");
+    
+      // Clear the form fields
+      document.getElementById("return-nic").value = "";
+      document.getElementById("return-title").value = "";
   }
 
   // Save updated data
   localStorage.setItem("rentItem", JSON.stringify(rentals));
   localStorage.setItem("Dvds", JSON.stringify(dvds));
+}
+
+function returnQuantity(dvdid, quantity) {
+  const Dvds = JSON.parse(localStorage.getItem("Dvds")) || [];
+  
+  console.log("DVD ID to return:", dvdid);
+  console.log("Current DVDs in local storage:", Dvds);
+
+  // Find the DVD to update
+  const dvdToUpdate = Dvds.find((dvd) => dvd.id === dvdid);
+  console.log(dvdToUpdate)
+
+  if (dvdToUpdate) {
+    dvdToUpdate.quantity += quantity; // Increase quantity for returns
+
+    // Save the updated DVD list back to local storage
+    localStorage.setItem("Dvds", JSON.stringify(Dvds));
+
+    console.log(`Updated Dvds after returning:`, Dvds);
+  } else {
+    console.log("Could not find DVD in the list.");
+  }
 }
