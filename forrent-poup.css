@@ -1,20 +1,23 @@
 /* Card Container */
 .card {
-    /* width: 300px; */
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 20px;
-    text-align: center;
-    padding: 15px;
-    transition: transform 0.3s ease;
-    position: relative;
-    overflow: hidden;
+  background: linear-gradient(135deg, #3993DD, #b2ebf2); /* Light blue gradient */
+  border: 1px solid #00acc1; /* Darker blue border */
+  border-radius: 12px; /* More rounded corners */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Deeper shadow for a lifted effect */
+  padding: 0px;
+  padding-right: 0%;
+  margin: 10px;
+  flex: 1;
+  min-width: 250px;
+  max-width: 300px;
+  transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
 }
 
-.card:hover {
-    transform: translateY(-5px);
+.card:hover  {
+  transform: translateY(-5px); /* Slight lift on hover */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* More prominent shadow on hover */
 }
+
 
 /* Image in the card */
 .card .item-image {
@@ -26,7 +29,7 @@
 
 /* Card Title */
 .card .item-title {
-    font-size: 1.rem;
+    font-size: 1.5rem;
     font-weight: 600;
     color: #333;
     margin-bottom: 10px;
@@ -40,14 +43,14 @@
 }
 
 /* Quantity input */
-/* .card .item-quantity {
-    width: 50px;
-    padding: 5px;
-    text-align: center;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    margin-bottom: 10px;
-} */
+.item-quantity {
+  width: 70px; /* Fixed width for consistency */
+  margin-right: 10px; /* Space between input and button */
+  padding: 10px; /* Add some padding for comfort */
+  border: 1px solid #1884dd; /* Matching border color */
+  border-radius: 4px; /* Rounded corners */
+  background-color: #ffffff; /* White background for input */
+}
 
 /* Rent Button */
 .card .rent-btn {

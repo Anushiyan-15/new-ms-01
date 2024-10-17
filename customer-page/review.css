@@ -97,4 +97,10 @@
     color: red;
 }
 
-
+/* Media Queries for Responsiveness */
+@media (max-width: 600px) {
+    .rent-container {
+        flex-direction: column; /* Stack cards */
+        align-items: center; /* Center align */
+    }
+}

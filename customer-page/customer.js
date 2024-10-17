@@ -25,7 +25,7 @@ function showdvd() {
                 <h2 class="item-title">Movie Name: ${Dvd.title}</h2>
                 <p class="item-description">Genre: ${Dvd.category} <br> Release date: ${Dvd.Date} <br> Director: ${Dvd.Director}</p>
                 <label>Quantity:</label><br>
-                <input type="number" class="item-quantity" value="${Dvd.quantity}" min="1" readonly>
+                <input type="number" class="item-quantity" value="${Dvd.quantity}" min="1" readonly>  <br>
                 <button class="rent-button" onclick="toggleRentButton(this)">Rent</button>
             
             </div>
