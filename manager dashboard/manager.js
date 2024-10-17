@@ -158,33 +158,86 @@ function customershow() {
   document.getElementById("display").style.display = "none";
   document.getElementById("reportcontainer").style.display = "none";
 }
-function displayCustomers() {
-  let customers = JSON.parse(localStorage.getItem("customers")) || [];
-  const customerTable = document.getElementById("customer-body");
-  customerTable.innerHTML = "";
+// function displayCustomers() {
+//   let customers = JSON.parse(localStorage.getItem("customers")) || [];
+//   const customerTable = document.getElementById("customer-body");
+//   customerTable.innerHTML = "";
 
-  customers.forEach((customer) => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-         <td>${customer.username}</td>
-            <td>${customer.nic}</td>
-            <td>${customer.email}</td>        
-            <td>${customer.number}</td>
+//   customers.forEach((customer) => {
+//     const row = document.createElement("tr");
+//     row.innerHTML = `
+//          <td>${customer.username}</td>
+//             <td>${customer.nic}</td>
+//             <td>${customer.email}</td>        
+//             <td>${customer.number}</td>
          
-        `;
-    customerTable.appendChild(row);
-  });
+//         `;
+//     customerTable.appendChild(row);
+//   });
+
+//   if (customers.length === 0) {
+//     const row = document.createElement("tr");
+//     row.innerHTML = '<td colspan="6">No customers found.</td>';
+//     customerTable.appendChild(row);
+//   }
+// }
+
+// displayCustomers();
+// // Load customers on page load
+// window.onload = displayCustomers;
+
+
+
+async function displayCustomers(){
+  try{
+    const customerresponce = await fetch ('http://localhost:5272/api/Customer/Get All Customers');
+    const customers = await customerresponce.json();
+
+    console.log(customers)
+
+
+   const customerTable = document.getElementById("customer-body");
+
+    customers.forEach(customer => {
+      const row = document.createElement('tr');
+
+      row.innerHTML=`
+      <td>${customer.userName}</td>
+      <td>${customer.nic}</td>
+      <td>${customer.email}</td>
+      <td>${customer.mobilenumber}</td>
+
+      `
+      customerTable.appendChild(row)
+      
+    });
+
 
   if (customers.length === 0) {
     const row = document.createElement("tr");
-    row.innerHTML = '<td colspan="6">No customers found.</td>';
-    customerTable.appendChild(row);
+     row.innerHTML = '<td colspan="6">No customers found.</td>';
+     customerTable.appendChild(row);
+   }
+
+  }catch(error){
+    console.error(error)
+   const customerTable = document.getElementById("customer-body");
+   const row = document.createElement('tr');
+   row.innerHTML = '<td colspan="6">Error fetching customer or rental data.</td>';
+   customerTable.appendChild(row);
+
+
   }
 }
 
 displayCustomers();
-// Load customers on page load
-window.onload = displayCustomers;
+
+
+
+
+
+
+
 
 // rental show function
 function rentalshow() {
@@ -194,72 +247,6 @@ function rentalshow() {
   document.getElementById("overduedcontainer").style.display = "none";
   document.getElementById("returncontainer").style.display = "none";
 }
-
-// function displayrentals() {
-
-//     let rentals = JSON.parse(localStorage.getItem('rentItem')) || [];
-//     const rentalTable = document.getElementById('rental-body');
-//     rentalTable.innerHTML = '';
-
-//     rentals.forEach(rental => {
-//         const row = document.createElement('tr');
-//         row.innerHTML = `
-//             <td>${rental.nic}</td>
-//             <td>${rental.name}</td>
-//             <td>${rental.number}</td>
-//           <td>${rental.rentDate}</td>
-//         `;
-//         rentalTable.appendChild(row);
-//     });
-
-//     if (rentals.length === 0) {
-//         const row = document.createElement('tr');
-//         row.innerHTML = '<td colspan="6">No rental found.</td>';
-//         rentalTable.appendChild(row);
-//     }
-// }
-// window.onload = displayrentals;
-
-// overdue alert
-// function overdueshow() {
-//     document.getElementById('dashboardcontainer').style.display = 'none';
-//     document.getElementById('customerdcontainer').style.display = 'none';
-//     document.getElementById('rentaldcontainer').style.display = 'none';
-//     document.getElementById('overduedcontainer').style.display = 'block';
-//     document.getElementById('returncontainer').style.display = 'none';
-
-// }
-
-// function checkOverdueRentals() {
-// let customers = JSON.parse(localStorage.getItem('customers')) || [];
-// console.log(customers)
-//     const now = new Date();
-//     const overdueList = document.getElementById('overdue-list');
-//     overdueList.innerHTML = '';
-
-//     customers.forEach(customer => {
-//         customer.rentalHistory.forEach(rental => {
-//             const returnDate = new Date(rental.returnDate);
-//             if (!rental.returnProcessed && returnDate < now) {
-//                 const row = document.createElement('tr');
-//                 row.innerHTML = `
-//                     <td>${customer.nic}</td>
-//                      <td>${customer.username}</td>
-//                     <td>${rental.regNumber}</td>
-//                     <td>${new Date(rental.rentalDate).toLocaleString()}</td>
-//                     <td>${returnDate.toLocaleString()}</p>
-//                     <td>${(now - returnDate) / (1000 * 60 * 60)}</td>
-//                 `;
-//                 overdueList.appendChild(row);
-//             }
-//         });
-//     });
-
-//     if (overduelist.innerHTML === '') {
-//         overduelist.innerHTML = 'No overdue rentals found';
-//     }
-// }
-// window.onload = checkOverdueRentals;
 
 function returnshow() {
   document.getElementById("customerdcontainer").style.display = "none";

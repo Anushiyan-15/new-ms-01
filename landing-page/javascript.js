@@ -62,59 +62,5 @@ loadReviewsFromLocalStorage();
 
 
 
-// const review = document.getElementById('reviews');
-// const viewdvd = document.getElementById('viewdvd');
-// const service =  document.getElementById('service');
-// const home = document.getElementById('home');
 
 
-
-
-// function viewabout(){
-//     document.getElementById('About').style.display='block';
-//     document.getElementById('reviews').style.display='none';
-//     document.getElementById('viewdvd').style.display='none';
-//     document.getElementById('Home').style.display='none';
-//     document.getElementById('service').style.display='none';
-// }
-
-
-
-
-
-let currentIndex = localStorage.getItem('currentIndex') ? parseInt(localStorage.getItem('currentIndex')) : 0;
-const slides = document.querySelectorAll('.slide');
-const dots = document.querySelectorAll('.dot');
-
-function showSlide(index) {
-    slides.forEach((slide, i) => {
-        slide.classList.remove('active');
-        dots[i].classList.remove('active');
-    });
-    slides[index].classList.add('active');
-    dots[index].classList.add('active');
-    localStorage.setItem('currentIndex', index);
-}
-
-function changeSlide(n) {
-    currentIndex += n;
-    if (currentIndex < 0) {
-        currentIndex = slides.length - 1;
-    } else if (currentIndex >= slides.length) {
-        currentIndex = 0;
-    }
-    showSlide(currentIndex);
-}
-
-function currentSlide(index) {
-    currentIndex = index;
-    showSlide(currentIndex);
-}
-
-// Initialize the slider
-showSlide(currentIndex);
-
-// Automatic slide transition every 5 seconds
-setInterval(() => {
-    changeSlide(1);
-}, 5000);
