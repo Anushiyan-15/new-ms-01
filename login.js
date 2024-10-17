@@ -1,12 +1,23 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
     const loginForm = document.getElementById('loginForm');
     const registerForm = document.getElementById('registerForm');
     const logoutBtn = document.getElementById('logoutBtn');
     const userInfo = document.getElementById('userInfo');
 
-    // Load data from localStorage
-    let users = JSON.parse(localStorage.getItem('customers')) || [];
-    // Check if user is logged in
+    let users = [];
+
+   // Fetch users from API
+   async function fetchUsers() {
+    try {
+        const response = await fetch('http://localhost:5272/api/Customer/Get All Customers');
+        users = await response.json();
+    } catch (error) {
+        console.error('Error fetching users:', error);
+    }
+}
+
+
+            await Promise.all([fetchUsers()]);
     const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
     if (currentUser) {
         if (currentUser === 'customer') {
@@ -17,12 +28,12 @@ document.addEventListener('DOMContentLoaded', function () {
     
     // Login form submission
     if (loginForm) {
-        loginForm.addEventListener('submit', function (e) {
+        loginForm.addEventListener('submit', async function (e) {
             e.preventDefault();
             const username = document.getElementById('loginUsername').value;
             const password = document.getElementById('loginPassword').value;
 
-            const user = users.find(u => u.username == username && u.password === password);
+            const user = users.find(u => u.userName == username && u.password === password);
             if (user) {
                 sessionStorage.setItem('currentUser', JSON.stringify(user));
                 window.location.href = 'customer-page/customer.html';
@@ -35,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     if (registerForm) {
-        registerForm.addEventListener('submit', function (e) {
+        registerForm.addEventListener('submit',async function (e) {
             e.preventDefault();
     
             const username = document.getElementById('registerUsername').value.trim();
@@ -47,34 +58,50 @@ document.addEventListener('DOMContentLoaded', function () {
             // Ensure unique ID generation
             const id = Number(Math.floor(Math.random() * 1000));
     
-            // Retrieve existing users from localStorage
-            const users = JSON.parse(localStorage.getItem('customers')) || [];
-    
+            const userdata = {
+                UserName:username,
+                Password:password,
+                Nic:nic,
+                mobilenumber:number,
+                Id:id,
+                Email:email
+            }
+            console.log(users)
             // Validate that the username and NIC are unique
-            if (users.some(user => user.username === username)) {
-                alert('Username already exists. Please choose a different username.');
+            if (users.some(user => user.userName === username && user.nic === nic)) {
+                alert('Username already exists or NIC already exists. Please choose a different username.');
                 return;
             }
-            if (users.some(user => user.nic === nic)) {
-                alert('NIC already exists. Please use a different NIC.');
-                return;
-            }
-    
-            // Add the new user to the array
-            const newUser = { username, password, nic, email, number, id };
-            users.push(newUser);
-    
-            // Store updated user list in localStorage
-            localStorage.setItem('customers', JSON.stringify(users));
-    
-            // Show success message and reset the form
-            alert('Registration successful. Please login.');
+
+            try{
+                // send post request to add customer
+                const responce = await fetch('http://localhost:5272/api/Customer/Add Customer',{
+                    method:'POST',
+                    headers:{
+                        'Content-Type': 'application/json'
+                        
+                    },
+                    body: JSON.stringify(userdata)
+                    
+                })
+                if(responce.ok){
+                    await fetchUsers()
+
+                alert('Registration successful. Please login.');
              // Reset the form after successful registration
-             document.getElementById('registerUsername').value = "";
-             document.getElementById('registerPassword').value = "";
-             document.getElementById('registerNIC').value = "";
-             document.getElementById('registeremail').value = "";
-             document.getElementById('registernumber').value = "";
+             registerForm.reset();
+
+                }else{
+                    const errorMessage = await responce.json();
+                    alert(`Registration failed: ${errorMessage.message}`);
+                }
+
+            
+            }catch (error) {
+                console.error('Error registering user:', error);
+                alert('Error occurred during registration');
+            }
+  
         });
     }
     
@@ -89,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Display user info
     if (userInfo && currentUser) {
-        userInfo.textContent = `${currentUser.username}`;
+        userInfo.textContent = `${currentUser.userName}`;
     }
 
 
