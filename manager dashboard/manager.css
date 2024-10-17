@@ -8,29 +8,40 @@
     font-family: 'Poppins', sans-serif;
 
 }
-.dashboard-container form button:hover{
+
+.dashboard-container form button:hover {
     background-color: #446e97;
 }
-.delete-button:hover{
+
+.delete-button:hover {
     background-color: rgb(224, 48, 48);
 }
-.editBtn:hover{
+
+.editBtn:hover {
     background-color: #a4caf0;
 }
-.editBtn, .delete-button{
-    background-color: rgba(58, 142, 232, 0.591) ;
+
+.editBtn,
+.delete-button {
+    background-color: rgba(58, 142, 232, 0.591);
     border-radius: 5px;
     padding: 5px;
     /* margin: 10px; */
 }
 
-#rental-body td{
+#rental-body td {
     color: whitesmoke;
 }
 
 
 
-.dashboard-container,.customer-container ,.rental-container, .overdue-container ,.return-container,.displaycontainer,.report-container{
+.dashboard-container,
+.customer-container,
+.rental-container,
+.overdue-container,
+.return-container,
+.displaycontainer,
+.report-container {
     margin: 20px;
     border-radius: 20px;
     width: 100rem;
@@ -42,43 +53,59 @@
     border: 1px solid rgba(255, 255, 255, 0.18);
     background-image: linear-gradient(to bottom, rgba(255, 0, 0, 0), #2980b9);
 }
+
 .dashboard-container h1 {
-  
+
     text-align: center;
     margin-bottom: 20px;
     color: #0b355f;
-    
-    
+
+
 }
 
 .dashboard-container h2 {
     color: #6797c6;
-  
+
 }
-.dashboard-container form, .dashboard-container table
-, .customer-container table,.rental-container table
-,.overdue-container table,.displaycontainer table,.update-container table,
+
+.dashboard-container form,
+.dashboard-container table,
+.customer-container table,
+.rental-container table,
+.overdue-container table,
+.displaycontainer table,
+.update-container table,
 .return-container form {
     margin: 20px 0;
     padding-left: 100px;
-    
-    
+
+
 }
 
-.displaycontainer, .rental-container, .overdue-container, .return-container ,.report-container h2{
+.displaycontainer,
+.rental-container,
+.overdue-container,
+.return-container,
+.report-container h2 {
     color: #0b355f;
 }
 
-#overduelist,.report-container{
-  
+#overduelist,
+.report-container {
+
     text-align: center;
 }
-.dashboard-container form,.return-container form{
+
+.dashboard-container form,
+.return-container form {
     display: block;
 }
 
 
-.dashboard-container input , .dashboard-container button,.return-container input,.return-container button {
+.dashboard-container input,
+.dashboard-container button,
+.return-container input,
+.return-container button {
     display: block;
     margin: 10px auto;
     padding: 10px;
@@ -87,33 +114,48 @@
 
 
 
-.dashboard-container button,.return-container button{
+.dashboard-container button,
+.return-container button {
     width: auto;
     border-radius: 5px;
     border: none;
 }
-.dashboard-container input,.return-container input{
+
+.dashboard-container input,
+.return-container input {
     border-radius: 5px;
     border: none;
 }
-.dashboard-container button,.return-container button ,.report-container button{
+
+.dashboard-container button,
+.return-container button,
+.report-container button {
     cursor: pointer;
 }
+
 .return-container button:hover {
     background-color: #2216ac;
 }
-.dashboard-container table ,.customer-container table,.rental-container table,.overdue-container table,.displaycontainer table,.report-container {
+
+.dashboard-container table,
+.customer-container table,
+.rental-container table,
+.overdue-container table,
+.displaycontainer table,
+.report-container {
     width: 100%;
     border-collapse: collapse;
 
 }
 
 
-.dashboard-container th, .dashboard-container td , 
-.customer-container th ,
-.rental-container th,.rental-container td,
-.overdue-container th,.overdue-container td
-.displaycontainer th .displaycontainer td{
+.dashboard-container th,
+.dashboard-container td,
+.customer-container th,
+.rental-container th,
+.rental-container td,
+.overdue-container th,
+.overdue-container td .displaycontainer th .displaycontainer td {
     border: 1px solid #ccc;
     padding: 10px;
     text-align: center;
@@ -121,18 +163,25 @@
 
 
 
-.dashboard-container th,.customer-container th ,.rental-container th ,.overdue-container th,.displaycontainer th {
+.dashboard-container th,
+.customer-container th,
+.rental-container th,
+.overdue-container th,
+.displaycontainer th {
     background-color: #f4f4f4;
 }
+
 .dashboard-container img {
     max-width: 100px;
     height: auto;
 }
+
 .manager-link {
     display: block;
     text-align: center;
     margin-top: 20px;
 }
+
 .manager-link a {
     text-decoration: none;
     color: #007bff;
@@ -167,7 +216,7 @@ body {
     box-shadow: 0px 4px 10px 1px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     transition: 1s;
-    background:#0056b3;
+    background: #0056b3;
     box-shadow: 0 8px 32px 0 rgba(204, 208, 255, 0.37);
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(3px);
@@ -183,21 +232,21 @@ body {
     align-items: center;
     gap: 10px;
     color: #0b355f;
-    
+
 }
 
-.container .brand img{
+.container .brand img {
     border-radius: 55px;
-    
+
 }
 
-.container .img{
+.container .img {
     display: flex;
     gap: 10px;
-    height: 50px; 
+    height: 50px;
     margin-top: 7px;
-   
- 
+
+
 }
 
 .container .brand h1 {
@@ -218,7 +267,7 @@ body {
     width: 100%;
     height: auto;
 
-    margin: 50px 0 ;
+    margin: 50px 0;
     align-items: center;
     justify-content: center;
 }
@@ -255,7 +304,7 @@ body {
 
 .container .navbar ul li a {
     color: whitesmoke;
-    
+
 }
 
 .container .navbar ul li a span {
@@ -272,7 +321,7 @@ body {
 .container .navbar ul li a:hover,
 .container .navbar ul li a:hover span,
 .container .navbar ul li a:hover i {
-    background:transparent;
+    background: transparent;
     backdrop-filter: blur(75px);
     background-color: #446e97;
 
@@ -280,18 +329,19 @@ body {
 
 }
 
-.container .navbar ul li a:hover{
+.container .navbar ul li a:hover {
     box-shadow: 0 5px 5px #000;
     transition: 0.5s all;
 }
 
-.container .brand{
+.container .brand {
     /* background-color: #575555; */
     height: 70px;
     gap: 5px;
 }
+
 .container.active {
-    width:80px;
+    width: 80px;
 }
 
 .container.active .brand {
@@ -318,77 +368,158 @@ body {
     display: none;
 }
 
-.log-out{
+.log-out {
     position: relative;
     top: 150px;
-    
+
 }
 
 
-#Dvds-table,#customer-table,#rental-table, #overdue-table{
+#Dvds-table,
+#customer-table,
+#rental-table,
+#overdue-table {
     color: #f6eeee;
     background-color: #1d456d;
     text-align: center;
 
 }
 
-#Dvds-table th,#customer-table, #overdue-table th{
+#Dvds-table th,
+#customer-table,
+#overdue-table th {
     color: #0b355f;
-    border:  white 1px;
+    border: white 1px;
 
 
 }
 
-#customer-table td{
+#customer-table td {
     color: #fff;
 
 }
-  .report-container button:hover {
+
+.report-container button:hover {
     background-color: green;
-  }
-  .report-container button{
+}
+
+.report-container button {
     background-color: rgb(59, 68, 240);
     width: 103px;
     border-radius: 5px;
     border: none;
-  }
+}
 
-  /* Table styles */
-  #rental-table1 ,#return-table {
+/* Table styles */
+#rental-table1,
+#return-table {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px auto; /* Add spacing between the tables */
+    margin: 20px auto;
+    /* Add spacing between the tables */
     max-width: 90%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a light shadow for styling */
-  }
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Add a light shadow for styling */
+}
 
-  th, td {
+th,
+td {
     padding: 12px;
-    text-align: center; /* Center align table data */
+    text-align: center;
+    /* Center align table data */
     border: 1px solid #ddd;
-  }
+}
 
-  /* Table header styling */
-  th {
+/* Table header styling */
+th {
     background-color: #5d6ffc;
     font-weight: bold;
-  }
+}
 
 
-  /* Add some space between the two tables */
-  #returnReport, #rentalReport {
+/* Add some space between the two tables */
+#returnReport,
+#rentalReport {
     margin-top: 30px;
-  }
+}
 
-  /* Responsive table adjustments */
-  @media (max-width: 768px) {
+/* Responsive table adjustments */
+@media (max-width: 768px) {
     table {
-      width: 100%; /* Ensure tables are responsive */
-      font-size: 14px;
+        width: 100%;
+        /* Ensure tables are responsive */
+        font-size: 14px;
     }
-  }
+}
 
-  #rental-table1 td,#return-table td{
+#rental-table1 td,
+#return-table td {
     background-color: white;
     color: #000;
-  }
+}
+
+/* edit section */
+
+/* Edit DVD Container Styles */
+.edit-Dvd-container {
+    background-color: #f9f9f9; /* Light background */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Spacing inside the container */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    max-width: 600px; /* Limit width */
+    margin: 20px auto; /* Center the container */
+}
+
+/* Heading Styles */
+.edit-Dvd-container h2 {
+    color: #0b355f; /* Primary color for heading */
+    margin-bottom: 20px; /* Space below the heading */
+    text-align: center; /* Center the heading */
+}
+
+/* Input Fields */
+.edit-Dvd-form input[type="text"],
+.edit-Dvd-form input[type="date"],
+.edit-Dvd-form input[type="number"],
+.edit-Dvd-form input[type="file"] {
+    width: 100%; /* Full width */
+    padding: 10px; /* Spacing inside */
+    margin: 10px 0; /* Space above and below */
+    border: 1px solid #0b355f; /* Border color */
+    border-radius: 4px; /* Rounded corners */
+    transition: border-color 0.3s; /* Smooth transition */
+}
+
+/* Focus Styles for Input Fields */
+.edit-Dvd-form input[type="text"]:focus,
+.edit-Dvd-form input[type="date"]:focus,
+.edit-Dvd-form input[type="number"]:focus {
+    border-color: #007bff; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+}
+
+/* Button Styles */
+.edit-Dvd-form button {
+    background-color: #0b355f; /* Primary color */
+    border: none; /* Remove border */
+    padding: 10px 15px; /* Spacing inside */
+    color: white; /* Text color */
+    font-weight: bold; /* Bold text */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition */
+    width: 100%; /* Full width */
+}
+
+/* Button Hover Effects */
+.edit-Dvd-form button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 576px) {
+    .edit-Dvd-container {
+        padding: 15px; /* Less padding on smaller screens */
+    }
+}
+

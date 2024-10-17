@@ -28,9 +28,69 @@ function reports() {
   document.getElementById("reportcontainer").style.display = "block";
 
 
-    // Call the function to load the report counts
-    loadReportCounts();
+  // Call the function to load the report counts
+  loadReportCounts();
 }
+
+// edit dvd function
+function editDvd(index) {
+  const Dvd = JSON.parse(localStorage.getItem("Dvds")) || [];
+  const dvdToEdit = Dvd[index];
+
+  // Populate the edit form with existing DVD data
+  document.getElementById("edit-Dvd-title").value = dvdToEdit.title;
+  document.getElementById("edit-Dvd-Director").value = dvdToEdit.Director;
+  document.getElementById("edit-Dvd-category").value = dvdToEdit.category;
+  document.getElementById("edit-dvd-date").value = dvdToEdit.Date;
+  document.getElementById("edit-Dvd-Quantity").value = dvdToEdit.quantity;
+
+  // Show the edit form
+  document.getElementById("edit-Dvd-container").style.display = "block";
+  document.getElementById("dashboardcontainer").style.display = "none";
+
+  const editForm = document.getElementById("edit-Dvd-form");
+  editForm.onsubmit = function (event) {
+    event.preventDefault();
+    updateDvd(index);
+  };
+}
+
+function updateDvd(index) {
+  const Dvd = JSON.parse(localStorage.getItem("Dvds")) || [];
+  const updatedDvd = {
+    title: document.getElementById("edit-Dvd-title").value.trim(),
+    Director: document.getElementById("edit-Dvd-Director").value.trim(),
+    category: document.getElementById("edit-Dvd-category").value.trim(),
+    Date: document.getElementById("edit-dvd-date").value.trim(),
+    quantity: document.getElementById("edit-Dvd-Quantity").value.trim(),
+    image: Dvd[index].image // Keep the original image unless updated
+  };
+
+
+  // Check if a new image was uploaded
+  const imageInput = document.getElementById("edit-Dvd-image");
+  if (imageInput.files[0]) {
+    const reader = new FileReader();
+    reader.onloadend = function () {
+      updatedDvd.image = reader.result; // Update with new image
+      saveUpdatedDvd(index, updatedDvd);
+    };
+    reader.readAsDataURL(imageInput.files[0]);
+  } else {
+    saveUpdatedDvd(index, updatedDvd); // Save without image change
+  }
+}
+
+function saveUpdatedDvd(index, updatedDvd) {
+  const Dvd = JSON.parse(localStorage.getItem("Dvds")) || [];
+  Dvd[index] = updatedDvd; // Update the DVD
+  localStorage.setItem("Dvds", JSON.stringify(Dvd)); // Save back to localStorage
+  displayDvd(); // Refresh the displayed DVDs
+  document.getElementById("edit-Dvd-container").style.display = "none"; // Hide edit form
+  document.getElementById("dashboardcontainer").style.display = "block"; // Show dashboard
+  // location.reload();
+}
+
 
 document.addEventListener("DOMContentLoaded", function () {
   const addDvdForm = document.getElementById("add-Dvd-form");
@@ -70,6 +130,16 @@ document.addEventListener("DOMContentLoaded", function () {
             `;
       DvdsTableBody.appendChild(row);
     });
+
+    // Add event listeners for edit buttons
+    document.querySelectorAll(".editBtn").forEach((button) => {
+      button.addEventListener("click", function () {
+        const index = this.getAttribute("data-index");
+        editDvd(index);
+       
+      });
+    });
+
 
     // Add event listeners for delete buttons
     document.querySelectorAll(".delete-button").forEach((button) => {
@@ -275,18 +345,18 @@ function overdueshow() {
       alert(`You are ${daysLate} days late! Late fees may apply.`);
     }
 
-      // Add to overdue list
-      const row = document.createElement("tr");
-      row.innerHTML = `
+    // Add to overdue list
+    const row = document.createElement("tr");
+    row.innerHTML = `
                 <td>${rental.nic}</td>
                 <td>${rental.name}</td>
                 <td>${rental.rentDate}</td>
                 <td>${rental.returnDate}</td>
                 <td>${charge} Rs</td>
             `;
-      overdueList.appendChild(row);
-    });
-      // Show the overdue section and hide other sections
+    overdueList.appendChild(row);
+  });
+  // Show the overdue section and hide other sections
   document.getElementById("dashboardcontainer").style.display = "none";
   document.getElementById("customerdcontainer").style.display = "none";
   document.getElementById("rentaldcontainer").style.display = "none";
@@ -294,7 +364,7 @@ function overdueshow() {
   document.getElementById("returncontainer").style.display = "none";
   document.getElementById("display").style.display = "none";
   document.getElementById("reportcontainer").style.display = "none";
-  };
+};
 
 
 
@@ -486,8 +556,8 @@ function returndvd() {
       // Update rental status
       rental.status = "Returned";
       rental.actualReturnDate = currentDate.toISOString();
-      returnQuantity(rental.dvdid,1)
-  
+      returnQuantity(rental.dvdid, 1)
+
       // Clear the form fields
       document.getElementById("return-nic").value = "";
       document.getElementById("return-title").value = "";
@@ -498,10 +568,10 @@ function returndvd() {
 
   if (!rentalFound) {
     alert("Rental request not found or already returned.");
-    
-      // Clear the form fields
-      document.getElementById("return-nic").value = "";
-      document.getElementById("return-title").value = "";
+
+    // Clear the form fields
+    document.getElementById("return-nic").value = "";
+    document.getElementById("return-title").value = "";
   }
 
   // Save updated data
@@ -511,20 +581,20 @@ function returndvd() {
 
 function returnQuantity(dvdid, quantity) {
   const Dvds = JSON.parse(localStorage.getItem("Dvds")) || [];
-  
+
   console.log("DVD ID to return:", dvdid);
   console.log("Current DVDs in local storage:", Dvds);
 
   // Find the DVD to update
   const dvdToUpdate = Dvds.find((dvd) => dvd.id === dvdid);
-  console.log("assign dvd:",dvdToUpdate)
+  console.log("assign dvd:", dvdToUpdate)
 
   if (dvdToUpdate) {
     dvdToUpdate.quantity += quantity; // Increase quantity for returns
 
     // Save the updated DVD list back to local storage
     localStorage.setItem("Dvds", JSON.stringify(Dvds));
- 
+
     console.log(`Updated Dvds after returning:`, Dvds);
 
     // Check if localStorage was updated correctly
@@ -543,7 +613,7 @@ function displayRentalReport() {
   rentalReportBody.innerHTML = ""; // Clear previous entries
 
   rentals.forEach((rental) => {
-    if (rental.status === "Approved" || rental.status === "pending" || rental.status === "Declined"  ) {
+    if (rental.status === "Approved" || rental.status === "pending" || rental.status === "Declined") {
       const rentalDate = new Date(rental.rentdate);
 
       rentalReportBody.innerHTML += `
@@ -613,15 +683,15 @@ function loadReportCounts() {
 
   // Loop through the rental items and count each status
   rentals.forEach(rental => {
-      if (rental.status === "Pending") {
-          totalPending++;
-      } else if (rental.status === "Approved") {
-          totalApproved++;
-      } else if (rental.status === "Declined") {
-          totalDeclined++;
-      } else if (rental.status === "Returned") {
-          totalReturned++;
-      }
+    if (rental.status === "Pending") {
+      totalPending++;
+    } else if (rental.status === "Approved") {
+      totalApproved++;
+    } else if (rental.status === "Declined") {
+      totalDeclined++;
+    } else if (rental.status === "Returned") {
+      totalReturned++;
+    }
   });
 
   // Display the counts in the respective HTML elements
